@@ -39,20 +39,22 @@ imdlib.get_data("rain", START_YEAR, END_YEAR, fn_format="yearwise", file_dir="..
   The historical training period is set to 2000–2019 to match GEFSv12.
 
 ## Completed Milestones
-- [x] **Task 01** — Repository setup, directory structure, data feasibility test.
-  - REAL GEFSv12 FORECAST -> REAL IMD OBSERVATION -> REAL ERROR confirmed.
-  - Successfully byte-ranged GEFS and decoded via `wgrib2`.
-  - Successfully downloaded and parsed IMD year 2000 via `imdlib`.
+- [x] **Task 01** — Repository setup, data feasibility test (GEFSv12 + IMD verified).
+- [x] **Task 02** — Build real GEFSv12 + IMD training dataset.
+  - Successfully fetched GEFSv12 via byte-range `.idx` and decoded via `wgrib2`.
+  - Matched with IMD `imdlib` 0.25° grid.
+  - Produced `training_dataset_sample.parquet` (4000 rows, 12 cols) over Maharashtra.
 
 ## Current Milestone
-**Task 02** — Define India sub-region, pull a real multi-month training sample from 2000-2019,
-save raw parquet files to `data/raw/`.
+**Task 03** — Feature engineering, dataset alignment, and bust label generation.
 
 ## Important Paths
 ```
 scripts/gefs_imd_verification_july.py # GEFS+IMD real data verification
-tests/test_smoke_task01.py      # smoke test
-data/raw/                       # raw parquet will go here (Task 02)
+src/data/build_training_dataset.py    # GEFS+IMD data builder script
+tests/test_dataset_task02.py    # dataset smoke tests
+data/raw/training_dataset_sample.parquet # Task 02 output dataset
+data/raw/training_dataset_sample_metadata.json # Task 02 dataset metadata
 data/interim/                   # aligned forecast+truth tables (Task 03)
 data/processed/                 # feature tables + bust labels (Task 04)
 src/data/                       # ingest scripts
@@ -66,7 +68,7 @@ wgrib2/                         # wgrib2 binary for GRIB2 decoding
 ## Environment / Setup
 ```powershell
 # Python 3.14.4  |  pip 26.0.1
-pip install requests pandas numpy   
+pip install requests pandas numpy pyarrow fastparquet
 pip install imdlib                  
 # wgrib2.exe is used for GRIB2 decoding (downloaded locally).
 ```
@@ -74,8 +76,8 @@ pip install imdlib
 ## Known Issues
 1. Open-Meteo remains available as a secondary fallback if needed, but not primary.
 2. GEFSv12 S3 path is `YYYYMMDDHH/` (10-digit, not `YYYYMMDD/HH/`).
-3. GEFS `apcp_sfc` requires 4x 6-hourly messages to sum a 24-hr Day 1 forecast.
-4. Windows console needs ASCII-only output.
+3. GEFS `apcp_sfc` requires 4x 6-hourly messages to sum a 24-hr Day 1 forecast. We handle this by fetching contiguous blocks.
+4. IMD grid has missing data (`NaN`) over the ocean, which we naturally drop during spatial joins.
 
 ## Strict Do-Not-Do Rules
 - NO synthetic data, ever.
@@ -84,13 +86,10 @@ pip install imdlib
 - NO random train/test splits — always temporal (chronological) splits.
 - NO new packages without checking if pandas/numpy/requests already suffice.
 - NO reprocessing of already-saved parquet files unless the schema changed.
-- Do NOT start Task 03 until Task 02 raw data is on disk and verified.
 
-## Next Task (Task 02)
-**Pull real training data.**
-1. Select India sub-region: 5-10 representative cities/grid-points spanning monsoon gradients.
-2. Pull a subset from 2000–2019 (e.g. one monsoon season like 2000) GEFSv12 forecast data (Day 1/3/5/7/10).
-3. Pull IMD truth for the same date range and locations.
-4. Save as `data/raw/forecasts_raw.parquet` and `data/raw/imd_truth_raw.parquet`.
-5. Validate: no all-null columns, date coverage > 80%, row counts match expectation.
-6. Update PROJECT_CONTEXT.md. Run smoke test. Report PASS/FAIL.
+## Next Task (Task 03)
+**Feature Engineering & Label Generation.**
+1. Load `data/raw/training_dataset_sample.parquet`.
+2. Define the "bust" label (e.g., forecast error > 85th percentile of errors for that lead time).
+3. Compute derived features: e.g., rolling spatial means, temporal lags, etc.
+4. Save to `data/processed/`.

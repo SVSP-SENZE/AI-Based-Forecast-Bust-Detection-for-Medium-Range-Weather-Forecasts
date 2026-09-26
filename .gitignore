@@ -1,0 +1,16 @@
+# Data directories
+data/raw/*.parquet
+data/raw/*.json
+data/raw/imd_rain_*
+data/interim/
+data/processed/
+
+# Temp files
+out.csv
+out.grib
+*.small
+temp_*.grib2
+temp_*.csv
+
+# wgrib2
+wgrib2/
