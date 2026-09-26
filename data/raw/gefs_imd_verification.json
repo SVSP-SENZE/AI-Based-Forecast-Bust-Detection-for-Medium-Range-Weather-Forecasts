@@ -1,0 +1,13 @@
+{
+  "issue_datetime": "2000-01-01T00:00:00",
+  "valid_date": "2000-01-02",
+  "location": {
+    "lat": 19.0,
+    "lon": 72.8
+  },
+  "member": "c00",
+  "gefs_day1_precip_mm": 0.0,
+  "imd_observed_mm": 0.0,
+  "abs_error_mm": 0.0,
+  "verdict": "PASS"
+}
