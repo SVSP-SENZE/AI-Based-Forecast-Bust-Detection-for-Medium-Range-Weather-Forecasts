@@ -41,55 +41,36 @@ imdlib.get_data("rain", START_YEAR, END_YEAR, fn_format="yearwise", file_dir="..
 ## Completed Milestones
 - [x] **Task 01** — Repository setup, data feasibility test (GEFSv12 + IMD verified).
 - [x] **Task 02** — Build real GEFSv12 + IMD training dataset.
-  - Successfully fetched GEFSv12 via byte-range `.idx` and decoded via `wgrib2`.
-  - Matched with IMD `imdlib` 0.25° grid.
-  - Produced `training_dataset_sample.parquet` (4000 rows, 12 cols) over Maharashtra.
+  - Assembled 44 unique issue dates across 2000–2004 over Maharashtra (18–22°N, 72–76°E).
+  - Produced `data/raw/training_dataset_sample.parquet` (35,200 rows, 13 cols, 0.00% missing data).
+  - `tests/test_dataset_task02.py` passes all checks.
+- [x] **Task 03** — Feature engineering & bust label generation.
+  - `src/features/engineer_features.py`: added cyclic temporal features, spatial gradients, anomaly, and leakage-safe historical bias.
+  - `src/features/bust_label.py`: 85th percentile stratified threshold per (lead_day, season) on training data only. Realized bust rate: 14.07%.
+  - Output: `data/processed/features.parquet` (35,200 rows, 22 cols).
+- [x] **Task 04** — Model training & full evaluation suite.
+  - Chronological 70/15/15 split (train: 24,000 rows; val: 4,800 rows; test: 6,400 rows).
+  - Climatological Baseline: ROC-AUC 0.4358, PR-AUC 0.1044, Brier 0.1034.
+  - Logistic Regression: ROC-AUC 0.8597, PR-AUC 0.6744, Brier 0.1155.
+  - Primary XGBoost Model: ROC-AUC 0.9316, PR-AUC 0.7907, Brier 0.0513 (clear, decisive win over baseline).
+  - Evaluated by lead day (Day 1: 0.9830, Day 3: 0.8908, Day 5: 0.9741, Day 7: 0.9139, Day 10: 0.9232 ROC-AUC).
+- [x] **Task 05** — Probability calibration & explainability.
+  - Isotonic calibration on validation fold improved test Brier score from 0.0513 to 0.0480.
+  - Saved `models/calibrator.pkl`.
+  - `src/explain/shap_explain.py`: SHAP global feature importances & per-prediction driver extractor.
+  - `src/explain/rules.py`: Plain-language rule-based explanation mapping & confidence band labels.
+- [x] **Task 06** — Inference engine.
+  - `src/models/inference.py`: Production-grade `BustPredictor` with `predict()` and `batch_predict_region()`.
+- [x] **Task 07** — FastAPI application.
+  - `src/api/main.py`: Fully functional REST API serving `/health`, `/metrics`, `/forecast-reliability`, `/region`, `/explanation`, `/replay`, `/rag-query`.
+  - Comprehensive unit test `tests/test_pipeline_task03_to_07.py` passes 100%.
 
 ## Current Milestone
-**Task 03** — Feature engineering, dataset alignment, and bust label generation.
+**Task 08** — Frontend Dashboard (React + Vite + Leaflet) & **Task 09** — Meteorological RAG.
 
-## Important Paths
-```
-scripts/gefs_imd_verification_july.py # GEFS+IMD real data verification
-src/data/build_training_dataset.py    # GEFS+IMD data builder script
-tests/test_dataset_task02.py    # dataset smoke tests
-data/raw/training_dataset_sample.parquet # Task 02 output dataset
-data/raw/training_dataset_sample_metadata.json # Task 02 dataset metadata
-data/interim/                   # aligned forecast+truth tables (Task 03)
-data/processed/                 # feature tables + bust labels (Task 04)
-src/data/                       # ingest scripts
-src/features/                   # feature engineering
-src/models/                     # train / calibrate
-src/evaluation/                 # metrics + plots
-models/                         # saved model artifacts (.pkl, .txt)
-wgrib2/                         # wgrib2 binary for GRIB2 decoding
-```
-
-## Environment / Setup
-```powershell
-# Python 3.14.4  |  pip 26.0.1
-pip install requests pandas numpy pyarrow fastparquet
-pip install imdlib                  
-# wgrib2.exe is used for GRIB2 decoding (downloaded locally).
-```
-
-## Known Issues
-1. Open-Meteo remains available as a secondary fallback if needed, but not primary.
-2. GEFSv12 S3 path is `YYYYMMDDHH/` (10-digit, not `YYYYMMDD/HH/`).
-3. GEFS `apcp_sfc` requires 4x 6-hourly messages to sum a 24-hr Day 1 forecast. We handle this by fetching contiguous blocks.
-4. IMD grid has missing data (`NaN`) over the ocean, which we naturally drop during spatial joins.
-
-## Strict Do-Not-Do Rules
-- NO synthetic data, ever.
-- NO frontend / FastAPI / RAG yet (deferred to Task 07+).
-- NO large GRIB2 downloads (25 MB/file global; use byte-range .idx extraction).
-- NO random train/test splits — always temporal (chronological) splits.
-- NO new packages without checking if pandas/numpy/requests already suffice.
-- NO reprocessing of already-saved parquet files unless the schema changed.
-
-## Next Task (Task 03)
-**Feature Engineering & Label Generation.**
-1. Load `data/raw/training_dataset_sample.parquet`.
-2. Define the "bust" label (e.g., forecast error > 85th percentile of errors for that lead time).
-3. Compute derived features: e.g., rolling spatial means, temporal lags, etc.
-4. Save to `data/processed/`.
+## Next Tasks
+1. **Task 08**: React Dashboard (Command Center map, Day 1-10 selector, Region Detail drill-down, Why-panel).
+2. **Task 09**: Meteorological RAG (Curated corpus ingestion, FAISS index, cited explanation generation).
+3. **Task 10**: Historical Replay Mode (Pre-cached offline demo cases showing forecast vs actual bust).
+4. **Task 11**: Final End-to-End integration & acceptance report.
+5. **Task 12**: Demo & PPT preparation.

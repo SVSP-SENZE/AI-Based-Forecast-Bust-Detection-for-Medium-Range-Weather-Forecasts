@@ -1,0 +1,33 @@
+{
+  "split": {
+    "train_dates": 30,
+    "val_dates": 6,
+    "test_dates": 8,
+    "train_rows": 24000,
+    "val_rows": 4800,
+    "test_rows": 6400,
+    "train_bust_rate": 0.1399,
+    "test_bust_rate": 0.1153,
+    "primary_model": "XGBoost"
+  },
+  "test_metrics": [
+    {
+      "model": "Climatological Baseline",
+      "roc_auc": 0.4358,
+      "pr_auc": 0.1044,
+      "brier": 0.1034
+    },
+    {
+      "model": "Logistic Regression",
+      "roc_auc": 0.8597,
+      "pr_auc": 0.6744,
+      "brier": 0.1155
+    },
+    {
+      "model": "XGBoost",
+      "roc_auc": 0.9316,
+      "pr_auc": 0.7907,
+      "brier": 0.0513
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+season,roc_auc,pr_auc,bust_rate,n
+monsoon,0.9391,0.8363,0.109,4800
+pre_monsoon,0.6656,0.2408,0.1725,800
+winter,0.9884,0.9884,0.0963,800

@@ -1,0 +1,1 @@
+{"features": ["lead_day", "lat", "lon", "month", "doy_sin", "doy_cos", "forecast_mean", "forecast_spread", "forecast_min", "forecast_max", "forecast_range", "forecast_anomaly", "spatial_gradient", "hist_bias", "season_enc"], "label": "is_bust"}

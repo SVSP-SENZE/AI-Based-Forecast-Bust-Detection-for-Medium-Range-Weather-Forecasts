@@ -1,0 +1,17 @@
+{
+  "forecast_mean": 0.413177,
+  "doy_cos": 0.116313,
+  "month": 0.100492,
+  "doy_sin": 0.058381,
+  "forecast_anomaly": 0.052996,
+  "hist_bias": 0.045159,
+  "lead_day": 0.034526,
+  "forecast_spread": 0.031632,
+  "forecast_min": 0.031612,
+  "forecast_range": 0.031169,
+  "lon": 0.027582,
+  "lat": 0.023817,
+  "spatial_gradient": 0.017275,
+  "forecast_max": 0.015871,
+  "season_enc": 0.0
+}

@@ -107,7 +107,7 @@ def main():
     # Overall metrics
     all_metrics = evaluate_all(test_df)
 
-    print("\n── Overall Metrics (Test Set) ──")
+    print("\n-- Overall Metrics (Test Set) --")
     print(f"{'Model':<30} {'ROC-AUC':>8} {'PR-AUC':>8} {'Brier':>8} {'F1':>8}")
     print("-" * 60)
     for name, m in all_metrics.items():
@@ -117,9 +117,9 @@ def main():
     lead_table  = stratified_table(test_df, "lead_day")
     season_table = stratified_table(test_df, "season")
 
-    print("\n── By Lead Day (XGBoost) ──")
+    print("\n-- By Lead Day (XGBoost) --")
     print(lead_table.to_string(index=False))
-    print("\n── By Season (XGBoost) ──")
+    print("\n-- By Season (XGBoost) --")
     print(season_table.to_string(index=False))
 
     # Save

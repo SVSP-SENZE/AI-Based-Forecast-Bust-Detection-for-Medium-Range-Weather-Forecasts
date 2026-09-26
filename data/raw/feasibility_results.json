@@ -159,7 +159,7 @@
     }
   },
   "imd": {
-    "imdlib": "NOT_INSTALLED",
+    "imdlib": "INSTALLED",
     "imd_2021": {
       "status": "HTTP_404"
     },
