@@ -1,0 +1,31 @@
+SOURCE: Historical Forecast Biases and Systematic Errors in NWP Over India
+CITATION: Mukhopadhyay et al. (2019) "Climate mean state and forecast biases in the NCEP GFS model over India"; Krishnamurthy & Shukla (2000) "Intraseasonal and interannual variability of rainfall over India"
+URL: https://doi.org/10.1175/JCLI-D-18-0649.1
+SECTION: Historical Bias Features and Their Role in Bust Prediction
+
+---
+
+SYSTEMATIC FORECAST BIASES OVER INDIA:
+
+DEFINITION OF HISTORICAL BIAS (hist_bias feature):
+hist_bias is the mean absolute error (MAE) computed from all historical forecast-observation pairs for the same stratum (lead time × season × region) that occurred strictly before the current forecast's issue date. It represents the "known difficulty" of this specific forecast type, based entirely on past performance.
+
+WHY HISTORICAL BIAS IS A PREDICTIVE FEATURE:
+Model biases are not random — they are often systematic and persistent. A region/season/lead-time combination that has historically produced large errors tends to continue doing so, because the underlying causes (orographic effects, parameterization errors, boundary layer representation) are fixed properties of the NWP model.
+
+Including historical bias as a feature allows our XGBoost model to learn: "forecasts for this region, in this season, at this lead time, have historically been harder to verify — the prior probability of a bust is higher regardless of the current forecast values."
+
+MAJOR DOCUMENTED BIASES IN NCEP MODELS (RELEVANT TO OUR GEFS TRAINING DATA):
+1. Wet bias over orographic regions: GFS/GEFS tends to overestimate rainfall over the Western Ghats windward slopes, especially at higher resolution. This produces large absolute errors when observed rainfall is actually lower (suppressed by local circulations the model misrepresents).
+2. Dry bias during break monsoon: During break monsoon phases (monsoon trough shifted north), GFS/GEFS sometimes underestimates the rainfall in the trough region.
+3. Phase errors in diurnal cycle: Convective rainfall over the Deccan Plateau peaks in the evening in observations, but GFS simulates a midday peak. This produces systematic timing errors at Day 1.
+4. Monsoon onset timing bias: GFS/GEFS sometimes advances or delays the monsoon onset by 2–4 days, causing large errors in the first 1–2 weeks of the monsoon season.
+
+LEAKAGE-SAFE COMPUTATION:
+Our hist_bias feature is computed strictly on data preceding each row's issue date — it is recalculated per fold in the temporal validation scheme. This prevents data leakage while ensuring the feature captures genuine historical difficulty.
+
+PRACTICAL INTERPRETATION:
+When hist_bias is elevated (e.g., > 15 mm/day for a rainfall stratum), the rule-based explanation layer surfaces: "Historically large errors for this region/lead/season (avg {hist_bias} mm)." This correctly communicates to operational users that this specific forecast type has a track record of being hard to verify, independent of what the current model run shows.
+
+GEFSv12 REFORECAST CONTEXT:
+The GEFSv12 reforecast (2000–2019, 5 ensemble members) is a homogeneous, bias-stable dataset: the model version is fixed, so biases measured in 2000–2004 (our training window) are representative of the overall model's characteristics for verification purposes. This is a key advantage over using operational model data that changes with each NWP model upgrade.

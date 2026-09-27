@@ -97,11 +97,14 @@ export default function WhyPanel({ explanation, ragAnswer, onRagQuery, loading }
           {ragAnswer.sources && ragAnswer.sources.length > 0 && (
             <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: '#0369a1' }}>
               Sources:{' '}
-              {ragAnswer.sources.map((s, i) => (
-                <span key={i} style={{ marginRight: '0.5rem' }}>
-                  [{i + 1}] {s}
-                </span>
-              ))}
+              {ragAnswer.sources.map((s, i) => {
+                const label = typeof s === 'object' ? (s.title || s.citation || s.section || 'Doc ' + (i+1)) : String(s);
+                return (
+                  <span key={i} style={{ marginRight: '0.5rem' }}>
+                    [{i + 1}] {label}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>

@@ -1,0 +1,49 @@
+SOURCE: Heavy Rainfall Events Over Maharashtra — Predictability and Climatology
+CITATION: IMD Annual Monsoon Reports; Gadgil (2003) "The Indian Monsoon and its variability"; IMD District-level Rainfall Statistics
+URL: https://imd.gov.in/pages/rainfall_main.php
+SECTION: Maharashtra Regional Climatology and Extreme Rainfall Patterns
+
+---
+
+MAHARASHTRA CLIMATE AND RAINFALL CLIMATOLOGY:
+
+GEOGRAPHIC SETTING:
+Maharashtra (18–22°N, 72–76°E) spans the Western Ghats and the interior Deccan Plateau:
+- Western Ghats (Konkan coast, windward): highest rainfall in India, 2000–5000 mm/year, driven by orographic enhancement of Southwest Monsoon moisture.
+- Sahyadri mountain ridges (1000–1500 m elevation) create a strong rainfall shadow.
+- Interior Maharashtra (Vidarbha, Marathwada): 600–900 mm/year, highly variable, dominated by monsoon depressions and occasional cyclonic systems.
+
+SEASONAL RAINFALL DISTRIBUTION:
+- June: 15–20% of annual total; highly variable (onset uncertainty)
+- July: 25–30% of annual total; peak monsoon
+- August: 20–25%
+- September: 15–20%; withdrawal begins NW first
+- October–May: < 5%; rabi crop moisture, winter western disturbances
+
+EXTREME RAINFALL EVENTS:
+Maharashtra has recorded some of India's most extreme single-day rainfall:
+- July 26, 2005 (Mumbai): 944 mm in 24 hours — one of the highest single-day totals globally; the event was poorly predicted by NWP models (a notable historical forecast bust).
+- Maharashtra Vidarbha: Frequent convective events in August–September producing localized > 200 mm/day, associated with monsoon depressions.
+
+HISTORICAL FORECAST ERROR CONTEXT:
+Rainfall in western Maharashtra shows some of the highest forecast error variability in India, partly because:
+1. The Ghats orographic signal is strong but very localized — small errors in wind direction translate to large rainfall errors.
+2. The monsoon trough position oscillates, producing active/break cycles where the forecast can be systematically wrong for 3–5 days.
+3. Arabian Sea moisture surges (LLJ — Low Level Jet intensification) can rapidly increase Konkan coast rainfall in ways that only medium-range ensemble spread captures, not deterministic runs.
+
+BUST-PRONE SCENARIOS FOR MAHARASHTRA:
+1. Pre-monsoon season (June before onset): Model places onset 3–5 days too early or late.
+2. Active-to-break transition: Model continues predicting active monsoon rainfall for 1–3 extra days.
+3. Monsoon depression landfall: As described in doc_08; track error of 100–200 km displaces the heavy-rain core to a different district.
+4. Arabian Sea surge: Sudden intensification of the South Asian Low-Level Jet increases moisture flux faster than the model captures in subsequent runs.
+
+GRID RESOLUTION LIMITATIONS:
+The GEFSv12 model at its native ~0.25° resolution represents the large-scale monsoon circulation well but cannot resolve:
+- Individual convective cells (< 10 km scale)
+- Sub-grid orographic enhancements along narrow ridge sections
+- Sea-breeze interactions with coastal orography
+
+This resolution limitation is an inherent source of forecast error that our model learns as part of the hist_bias for the Maharashtra stratum.
+
+IMPLICATIONS FOR CONFIDENCE ASSESSMENT:
+For Maharashtra forecasts with high forecast_mean (> 50 mm/day), high forecast_anomaly (> 20 mm above normal), or high spatial_gradient (indicating an orographically sensitive placement), the model correctly assigns elevated bust probability, consistent with the documented historical difficulty of verifying heavy-rain events in this region.

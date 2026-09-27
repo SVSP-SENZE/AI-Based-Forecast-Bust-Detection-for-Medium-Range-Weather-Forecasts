@@ -1,0 +1,41 @@
+SOURCE: ECMWF — Medium-Range Forecast Predictability and Ensemble Systems
+CITATION: ECMWF Technical Memoranda; Buizza et al. (2005) "A comparison of the ECMWF, MSC and NCEP global ensemble prediction systems"; ECMWF User Guide on IFS
+URL: https://www.ecmwf.int/en/forecasts/documentation-and-support/medium-range-forecasts
+SECTION: Ensemble Spread, Predictability Limits, and Forecast Uncertainty
+
+---
+
+ECMWF ENSEMBLE PREDICTION SYSTEM (EPS):
+
+The ECMWF EPS produces 50+1 ensemble members by perturbing initial conditions (singular vectors) and stochastic model physics (SPPT — Stochastically Perturbed Parameterization Tendencies). Ensemble spread is the standard deviation among members at any given grid point and time.
+
+ENSEMBLE SPREAD AS A PREDICTABILITY PROXY:
+- When ensemble spread is large, the atmosphere's future state is more uncertain — the model is less confident about where the rainfall will occur and how much.
+- The ideal ensemble is "reliable" in the sense that spread (uncertainty estimate) matches root-mean-square error over many cases.
+- In practice, NWP ensembles are often slightly underdispersive (spread underestimates actual error), especially at short to medium range and for precipitation.
+
+SPREAD-ERROR CORRELATION:
+- Higher ensemble spread is positively correlated with higher forecast error, validating spread as an uncertainty indicator.
+- However, the relationship is noisy: low spread does not guarantee low error (deterministic busts can occur even when members agree), and high spread does not always mean a bust will occur.
+- The correlation coefficient between ensemble spread and absolute error for precipitation forecasts is typically 0.3–0.5 at medium range — informative but not deterministic.
+
+FORECAST REVISION SIGNAL:
+- When the same valid time is predicted by consecutive model runs (e.g., today's Day-5 forecast vs. yesterday's Day-6 forecast for the same valid date), large differences signal instability in the forecast.
+- Forecast revision volatility (the change between consecutive runs' predictions for the same valid time) is a recognized predictor of eventual bust risk. A forecast that changes little from run to run is more likely to verify correctly.
+- This is consistent with predictability theory: the signal-to-noise ratio for a specific feature improves as the feature approaches within a predictable window; large late-stage revisions indicate the feature was previously outside the predictable window.
+
+SPATIAL DISAGREEMENT BETWEEN GRID POINTS:
+- High spatial gradient in a forecast (neighboring grid points predicting very different rainfall amounts) can indicate either: (a) a genuine, well-resolved physical gradient (e.g., orographic enhancement), or (b) numerical noise at the model's effective resolution limit.
+- In cases of high spatial gradient coinciding with high ensemble spread, both factors compound the uncertainty. This combination is associated with elevated bust risk for point-specific verification.
+
+MEDIUM-RANGE PREDICTABILITY LIMITS (INDIA):
+- The ECMWF S2S database and verification studies show that over tropical regions, including the Indian monsoon domain, 500 hPa geopotential is predictable to approximately 7–10 days, but precipitation is meaningful only to 3–5 days for event-scale (day-to-day) forecasts.
+- Large-scale monsoon phase (active vs. break) may be predictable to 10–14 days through MJO teleconnections.
+- Extreme rainfall events associated with monsoon depressions are predictable to only 1–4 days for intensity; track is somewhat more predictable.
+
+WESTERN DISTURBANCES (WDs):
+- WDs are eastward-propagating extratropical troughs embedded in the mid-latitude westerlies that affect northwest India and the Himalayas, especially in winter (December–March). During early monsoon (May–June), interaction of WDs with the pre-monsoon trough can produce extremely localized, difficult-to-forecast heavy rainfall events.
+- Predictability of WD-induced rainfall is limited by the interaction with orography: small errors in wind direction produce large errors in rainfall due to orographic locking. Lead-time skill for WD-associated events often falls off rapidly beyond Day 3.
+
+CLIMATOLOGICAL REFERENCE CONTEXT:
+For establishing bust thresholds and climatological baselines: the 85th-percentile error threshold means that roughly 15 out of 100 forecasts will be classified as busts by construction. The climatological baseline model (predicting the historical bust rate for each stratum) has no discriminatory power beyond what the base rate provides.

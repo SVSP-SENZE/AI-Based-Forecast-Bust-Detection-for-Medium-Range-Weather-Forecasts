@@ -1,0 +1,36 @@
+SOURCE: Intraseasonal Variability — MJO and Monsoon Active-Break Cycles
+CITATION: Goswami & Ajaya Mohan (2001) "Intraseasonal oscillations and interannual variability of the Indian Summer Monsoon"; Wheeler & Hendon (2004) "An all-season real-time multivariate MJO index"
+URL: https://doi.org/10.1175/1520-0442(2001)014<1180:IOAIVO>2.0.CO;2
+SECTION: Active/Break Monsoon Transitions and Their Impact on Forecast Predictability
+
+---
+
+ACTIVE/BREAK MONSOON CYCLES:
+
+DEFINITIONS:
+- Active monsoon spell: period of enhanced rainfall over central India, associated with a well-organized monsoon trough near its climatological position, active eastward moisture flux from the Bay of Bengal. Typically 3–7 days duration.
+- Break monsoon spell: period of suppressed rainfall over most of India (except some Himalayan regions), associated with northward displacement of the monsoon trough and enhanced northeast India rainfall. Duration: 2–10 days.
+
+TRANSITION DYNAMICS:
+The transition between active and break spells is modulated by:
+1. The Madden-Julian Oscillation (MJO): 30–60 day wave that modulates tropical convection globally. Active MJO phase 2–3 enhances Indian monsoon rainfall; phases 6–7 suppress it. MJO is predictable to approximately 3 weeks.
+2. Low-frequency planetary wave forcing (quasi-biweekly oscillation, 10–20 day).
+3. Intraseasonal SST (sea surface temperature) variability in the Bay of Bengal and Arabian Sea.
+
+FORECAST PREDICTABILITY AT TRANSITION POINTS:
+The most challenging periods for NWP forecasting are the TRANSITIONS between active and break spells:
+- The model may predict continuation of an active spell when a break is imminent.
+- Or it may predict a break when an active spell is strengthening.
+- These 1–3 day "transition errors" produce very large absolute errors for specific dates and specific locations.
+
+IMPLICATIONS FOR BUST PROBABILITY:
+Transition dates systematically produce higher bust rates. Our model captures this through:
+- forecast_anomaly: during transitions, the anomaly can swing from large positive to large negative quickly.
+- hist_bias: if similar transition dates (same season, similar synoptic pattern) historically showed large errors, hist_bias will be elevated.
+- The model does NOT explicitly detect transitions (that requires regime classification — future work) but the feature signal of transition events naturally produces elevated bust probability.
+
+SEASONAL CONTEXT:
+Our doy_sin/doy_cos features encode the day-of-year in a circular fashion, allowing the model to learn that June (onset uncertainty), September (withdrawal uncertainty), and peak monsoon July–August (maximum active/break oscillation) have systematically different error characteristics.
+
+KEY TAKEAWAY FOR RAG EXPLANATIONS:
+When a forecast is flagged as Low Reliability during monsoon season (June–September), one contributing factor is the inherent difficulty of predicting active/break transitions. This is consistent with the well-documented, published literature on monsoon intraseasonal variability and is not a failure unique to our system — it reflects a fundamental physical predictability limit of the atmosphere.

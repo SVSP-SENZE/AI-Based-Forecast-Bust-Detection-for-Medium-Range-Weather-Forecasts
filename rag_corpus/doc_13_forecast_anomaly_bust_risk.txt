@@ -1,0 +1,41 @@
+SOURCE: Forecast Anomaly and Regime Context for Bust Risk
+CITATION: Webster et al. (1998) "Monsoons: Processes, Predictability, and the Prospects for Prediction"; Palmer et al. (2000) "Predicting uncertainty in forecasts of weather and climate"
+URL: https://doi.org/10.1175/1520-0469(1998)055<1329:MPPAT>2.0.CO;2
+SECTION: Forecast Anomaly Features and Extreme Event Predictability
+
+---
+
+FORECAST ANOMALY AS A BUST RISK INDICATOR:
+
+DEFINITION:
+forecast_anomaly = forecast_mean - local_climatological_normal(day_of_year, grid_cell)
+where local_climatological_normal is the historical mean rainfall for that day-of-year and location, computed from the ERA5/IMD truth series on data prior to the forecast date.
+
+PHYSICAL INTERPRETATION:
+- Positive anomaly (forecast_anomaly > 0): The model predicts more rainfall than climatologically normal for this day/location.
+- Negative anomaly (forecast_anomaly < 0): The model predicts drier conditions than usual.
+- Large |forecast_anomaly| → unusual meteorological conditions → higher inherent uncertainty.
+
+WHY ANOMALY MATTERS FOR BUST RISK:
+1. DISTRIBUTION TAILS: Extreme rainfall events (those in the right tail of the rainfall distribution) are harder to predict accurately because they often involve complex synoptic forcing (monsoon depressions, MJO-enhanced moisture surges) that may be represented poorly or with large uncertainty in NWP ensembles.
+
+2. MODEL PHYSICS LIMITATIONS: Physical parameterizations (convective parameterization in particular) are tuned to represent "average" conditions reasonably well. For extreme anomalies, they may produce qualitatively wrong behavior (e.g., triggering convection too early, too late, or in the wrong location).
+
+3. VERIFICATION SENSITIVITY: At high rainfall amounts, the percentile-based error metric (how we define "bust") is particularly sensitive: a 20 mm error on a day with 200 mm observed is the same percentile as a 5 mm error on a day with 10 mm observed, but the physical meaning is very different.
+
+BELOW-NORMAL ANOMALY BUST RISK:
+Negative anomalies (forecast well below normal) also elevate bust risk, though less obviously:
+- During active monsoon periods, a forecast predicting dry conditions may simply be wrong about the onset of an active spell.
+- "Dry busts" (forecasting drier conditions than occurred) are often associated with missed monsoon depressions or MJO active phases.
+- In our model, forecast_anomaly < -15 mm triggers the rule-based explanation: "Forecast is well below normal — potential missed rainfall event."
+
+SEASONAL MODULATION:
+The significance of a given forecast_anomaly value depends on season:
+- During peak monsoon (July–August), absolute anomalies are naturally larger (higher base rainfall), so the same percentage deviation represents different information.
+- The doy_sin/doy_cos features in our model capture this seasonal context and allow the XGBoost model to interpret anomaly values in their seasonal context.
+
+HEAVY RAINFALL CONTEXT:
+When forecast_mean > 50 mm/day (our rule threshold for "High rainfall forecast"), the probability of a large absolute error is inherently higher — not because the model is worse at high rainfall, but because the magnitude of potential errors scales with the quantity being predicted. This is captured both in the rule-based explanation and implicitly in the model's learned splits.
+
+IMPLICATIONS FOR DISASTER MANAGEMENT:
+Heavy rainfall forecasts (high forecast_anomaly, high forecast_mean) that also carry high bust probability present the most operationally consequential risk: either the heavy rain will occur (and emergency preparation is warranted) or the forecast will bust (and resources may be misdirected). The combination of both signals is specifically what our system is designed to flag early.

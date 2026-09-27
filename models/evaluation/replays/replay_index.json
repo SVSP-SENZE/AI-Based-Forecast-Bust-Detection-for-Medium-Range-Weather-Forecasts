@@ -1,0 +1,23 @@
+{
+  "replay_cases": [
+    {
+      "case_id": "case_001_monsoon_bust",
+      "title": "Major Monsoon Bust Case \u2014 High Bust Probability / Low Confidence",
+      "issue_date": "2002-07-15",
+      "file": "replay_2002-07-15.json"
+    },
+    {
+      "case_id": "case_002_verified_high_confidence",
+      "title": "High-Confidence Verified Forecast \u2014 Low Bust Probability, Successfully Verified",
+      "issue_date": "2001-08-20",
+      "file": "replay_2001-08-20.json"
+    },
+    {
+      "case_id": "case_003_lead_time_divergence",
+      "title": "Lead-Time Uncertainty Divergence \u2014 Day 1-3 Confident, Day 7-10 High-Risk",
+      "issue_date": "2003-06-10",
+      "file": "replay_2003-06-10.json"
+    }
+  ],
+  "generated_at": "2026-09-26T14:54:04.580085Z"
+}

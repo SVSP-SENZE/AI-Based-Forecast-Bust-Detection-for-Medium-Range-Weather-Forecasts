@@ -1,0 +1,39 @@
+SOURCE: Monsoon Depression Predictability and Track Forecasting
+CITATION: Sandeep et al. (2018) "Predictability of monsoon low-pressure systems"; IMD Technical Notes on Monsoon Depressions
+URL: https://imd.gov.in/pages/cyclone_history.php
+SECTION: Monsoon Depressions as High Bust-Risk Events
+
+---
+
+MONSOON DEPRESSIONS — DEFINITION AND CHARACTERISTICS:
+
+A monsoon depression is a synoptic-scale low-pressure system (minimum 3 closed isobars at sea level) that typically forms in the Bay of Bengal during the active monsoon season (July–September). It is a weaker system than a tropical cyclone but can produce extremely heavy rainfall (> 100 mm/day) over large areas as it tracks westward or northwestward across the Indian subcontinent.
+
+KEY CHARACTERISTICS:
+- Formation region: primarily Bay of Bengal (85–90°E, 15–22°N) during monsoon season.
+- Track: typically moves WNW toward Odisha/Andhra Pradesh, then northward or westward across central India (Chhattisgarh, Madhya Pradesh, Maharashtra).
+- Duration: 3–7 days as a depression; may weaken as it moves inland and loses moisture source.
+- Rainfall: 50–200 mm/day in the core; large spatial gradient between the vortex core and surroundings.
+
+HISTORICAL FREQUENCY: India records approximately 3–6 monsoon depressions per season historically, with interannual variability.
+
+PREDICTABILITY CHARACTERISTICS (HIGH BUST RISK):
+1. Track predictability: NWP models typically predict the track to within 200–300 km at Day 2–3. Beyond Day 5, track errors compound rapidly. A 200 km track error at Day 5 means the forecast maximum rainfall may be placed entirely in the wrong administrative district.
+
+2. Intensity predictability: Depression intensity (central pressure, rainfall rate) is less predictable than track. Rapid weakening over land is particularly hard to predict.
+
+3. Spatial rainfall gradient: The depression's rainfall is spatially concentrated, with a steep gradient from core to periphery. This amplifies the "double penalty" problem — a small track error produces large errors at specific grid points.
+
+4. Phase with monsoon trough: When the monsoon trough is also active, the combined rainfall can exceed model predictions. The interaction between the depression and the trough is poorly captured at medium range.
+
+BUST RISK SIGNATURE FOR DEPRESSION EVENTS:
+- High ensemble spread in track position.
+- High spatial_gradient in the rainfall forecast (steep core/periphery gradient reflected in the model output).
+- High forecast_mean and forecast_anomaly (above-normal rainfall predicted near the center).
+- Elevated hist_bias for the relevant lead times and season — monsoon depressions are historically among the hardest events to verify.
+
+IMPLICATIONS FOR OUR MODEL:
+Our bust-detection model does not explicitly know whether a monsoon depression is present (regime classification is not built in the MVP). However, the feature signature of depression events (high spread, high spatial gradient, high forecast anomaly) naturally feeds into the model and tends to produce higher bust probability — consistent with what the physical literature predicts.
+
+MAHARASHTRA CONTEXT:
+Maharashtra (our training region, 18–22°N, 72–76°E) is affected by monsoon depressions that cross the Deccan plateau, typically 3–7 days after Bay of Bengal formation. The Western Ghats act as a major orographic driver, making the spatial placement of rainfall cores highly sensitive to the exact depression track and its interaction with the pre-existing orographic flow.

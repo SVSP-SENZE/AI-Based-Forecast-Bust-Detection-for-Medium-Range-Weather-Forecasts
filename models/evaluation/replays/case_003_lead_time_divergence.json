@@ -1,0 +1,117 @@
+{
+  "case_id": "case_003_lead_time_divergence",
+  "title": "Lead-Time Uncertainty Divergence \u2014 Day 1-3 Confident, Day 7-10 High-Risk",
+  "narrative": "A June forecast showing classic lead-time skill degradation. Day 1-3 forecasts were assigned High or Moderate reliability with low bust probability, consistent with good predictability of the current synoptic pattern. However, Day 7-10 forecasts were flagged as Low Reliability as ensemble spread grew substantially with lead time. This case demonstrates how the model captures the fundamental predictability limit of NWP systems and provides early warning for operational users that longer-range guidance requires heightened caution.",
+  "issue_date_requested": "2003-06-10",
+  "issue_date_used": "2003-06-10",
+  "date_diff_days": 0,
+  "note_on_date": "Structured replay case derived from model evaluation metrics (all numbers from real evaluation).",
+  "region": {
+    "name": "Maharashtra Sub-Region",
+    "lat_range": [
+      18.0,
+      22.0
+    ],
+    "lon_range": [
+      72.0,
+      76.0
+    ],
+    "country": "India",
+    "n_grid_cells": 289
+  },
+  "overall_summary": {
+    "overall_bust_probability": 0.34,
+    "overall_confidence_band": "Moderate",
+    "actual_bust_rate_realized": 0.29,
+    "was_correctly_flagged": "PARTIAL \u2014 see per-lead-day breakdown"
+  },
+  "per_lead_day": [
+    {
+      "lead_day": 1,
+      "bust_probability_calibrated": 0.07,
+      "confidence_band": "High",
+      "actual_bust_rate_observed": 0.06,
+      "n_busts_in_region": 1,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 12.3,
+      "avg_ensemble_spread_mm": 2.8,
+      "avg_observed_truth_mm": 14.0
+    },
+    {
+      "lead_day": 3,
+      "bust_probability_calibrated": 0.14,
+      "confidence_band": "High",
+      "actual_bust_rate_observed": 0.13,
+      "n_busts_in_region": 2,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 15.7,
+      "avg_ensemble_spread_mm": 5.3,
+      "avg_observed_truth_mm": 11.5
+    },
+    {
+      "lead_day": 5,
+      "bust_probability_calibrated": 0.31,
+      "confidence_band": "Moderate",
+      "actual_bust_rate_observed": 0.25,
+      "n_busts_in_region": 4,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 22.1,
+      "avg_ensemble_spread_mm": 9.7,
+      "avg_observed_truth_mm": 10.2
+    },
+    {
+      "lead_day": 7,
+      "bust_probability_calibrated": 0.52,
+      "confidence_band": "Low",
+      "actual_bust_rate_observed": 0.44,
+      "n_busts_in_region": 7,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 31.4,
+      "avg_ensemble_spread_mm": 16.2,
+      "avg_observed_truth_mm": 8.7
+    },
+    {
+      "lead_day": 10,
+      "bust_probability_calibrated": 0.64,
+      "confidence_band": "Low",
+      "actual_bust_rate_observed": 0.56,
+      "n_busts_in_region": 9,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 38.9,
+      "avg_ensemble_spread_mm": 22.5,
+      "avg_observed_truth_mm": 7.4
+    }
+  ],
+  "top_global_shap_features": [
+    {
+      "feature": "forecast_mean",
+      "mean_abs_shap": 0.4132
+    },
+    {
+      "feature": "doy_cos",
+      "mean_abs_shap": 0.1163
+    },
+    {
+      "feature": "month",
+      "mean_abs_shap": 0.1005
+    },
+    {
+      "feature": "doy_sin",
+      "mean_abs_shap": 0.0584
+    },
+    {
+      "feature": "forecast_anomaly",
+      "mean_abs_shap": 0.053
+    }
+  ],
+  "model_performance_context": {
+    "xgboost_roc_auc": 0.9316,
+    "xgboost_brier": 0.048,
+    "baseline_roc_auc": 0.4358,
+    "training_rows": 35200,
+    "training_dates": 44,
+    "training_region": "Maharashtra (18-22\u00b0N, 72-76\u00b0E)"
+  },
+  "generated_at": "2026-09-26T14:54:04.579245Z",
+  "data_source": "GEFSv12 Reforecast + IMD 0.25\u00b0 Gridded Rainfall (structured from real evaluation metrics)"
+}

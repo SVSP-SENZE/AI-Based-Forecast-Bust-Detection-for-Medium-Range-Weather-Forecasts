@@ -14,3 +14,13 @@ temp_*.csv
 
 # wgrib2
 wgrib2/
+
+# Python bytecode and caches
+__pycache__/
+*.pyc
+.DS_Store
+
+# Frontend build artifacts and dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/

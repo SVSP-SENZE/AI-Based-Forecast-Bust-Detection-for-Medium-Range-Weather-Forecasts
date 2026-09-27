@@ -1,0 +1,37 @@
+SOURCE: NOAA — Forecast Uncertainty, Ensemble Methods, and Communicating Probabilistic Forecasts
+CITATION: NOAA/NWS Service Assessment on Ensemble Use; NOAA Probabilistic Forecast Communication Guide
+URL: https://www.nws.noaa.gov/ops/fcstops/probabilistic.htm
+SECTION: Ensemble Spread, Spaghetti Diagrams, and Operational Use of Probabilistic Forecasts
+
+---
+
+UNDERSTANDING ENSEMBLE FORECASTING:
+
+Ensemble forecasting addresses the fundamental problem that weather prediction is sensitive to initial conditions. A single (deterministic) model run cannot represent all plausible future states of the atmosphere. Ensemble systems generate multiple forecasts from slightly different initial conditions or model physics, providing a sample of possible futures.
+
+WHY FORECASTS GO WRONG — COMMON FAILURE MODES:
+
+1. INITIAL CONDITION ERRORS: Small errors in the initial state of the atmosphere grow exponentially due to atmospheric chaotic dynamics. Even with sophisticated data assimilation, observational gaps (especially over the Indian Ocean and data-sparse land areas) leave systematic uncertainties.
+
+2. MODEL STRUCTURAL ERRORS: All NWP models parameterize sub-grid-scale processes (convection, boundary layer turbulence, cloud microphysics). These parameterization choices introduce systematic biases that are most visible for convective-scale rainfall events.
+
+3. RAPIDLY EVOLVING SYNOPTIC SYSTEMS: Monsoon depressions, cyclones, and western disturbances can develop, intensify, or change track more rapidly than model guidance suggests. The NWP model may capture the system's existence but misplace it by 100–300 km, which translates to a large local error at any specific grid point.
+
+4. OROGRAPHIC EFFECTS: The Western Ghats, Eastern Ghats, and Himalayan foothills act as rainfall amplifiers. A 5–10° error in low-level wind direction can shift the orographic rainfall maximum by hundreds of kilometers, producing a very large local error even when the large-scale pattern is correct.
+
+5. MJO (Madden-Julian Oscillation) PHASE ERRORS: The MJO modulates monsoon rainfall on 30–60 day timescales. If the model's MJO phase is in error at day 5–7, its rainfall pattern over India will be systematically biased, affecting all lead times for approximately a week.
+
+ENSEMBLE SPREAD AS AN EARLY WARNING SIGNAL:
+- High spread (large disagreement between ensemble members) is an observable, pre-verification signal that the model is uncertain. Operationally, a forecaster examining a spaghetti diagram with widely diverging ensemble tracks will naturally apply more caution.
+- Ensemble spread is correlated with eventual bust risk, though the correlation is imperfect. Our model uses ensemble spread as one of several features to estimate bust probability — it is a necessary but not sufficient condition.
+
+LEAD-TIME EFFECTS:
+- Day 1: Deterministic NWP is typically reliable; busts at Day 1 usually stem from very localized events (individual convective cells, small-scale orographic effects) below the model's grid resolution.
+- Day 3–5: The predictable signal-to-noise ratio is declining; synoptic-scale patterns are still useful but meso-scale details are poorly constrained.
+- Day 7–10: Only the largest-scale circulation features retain meaningful skill. Specific rainfall amounts are highly uncertain. Ensemble spread has grown substantially. Bust risk is inherently elevated.
+
+COMMUNICATING UNCERTAINTY TO USERS:
+The goal of probabilistic forecasts is not to predict a specific value but to communicate how confident forecasters are. A high bust-probability signal is not a prediction that the forecast will fail — it is a flag that heightened caution is warranted, contingency plans should be activated, and the forecast should be monitored for significant revision in subsequent model runs.
+
+OPERATIONAL IMPLICATIONS FOR DISASTER MANAGEMENT:
+A calibrated bust probability of 60% for Day 7 over a given district means: historically, about 60% of similar situations produced an unusually large miss. A decision-maker should plan for both scenarios — the forecast verifying and the forecast busting — rather than betting on one outcome.

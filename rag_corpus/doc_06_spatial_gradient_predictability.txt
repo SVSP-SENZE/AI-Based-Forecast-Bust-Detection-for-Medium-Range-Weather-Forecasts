@@ -1,0 +1,32 @@
+SOURCE: Spatial Disagreement and Convective-Scale Predictability in Monsoon Forecasts
+CITATION: Hohenegger & Schär (2007) "Atmospheric predictability at synoptic versus cloud-resolving scales"; Stensrud et al. (2009) "Convective-scale warn-on-forecast system"
+URL: https://doi.org/10.1175/BAMS-88-11-1783
+SECTION: Spatial Forecast Gradients as Bust Risk Indicators
+
+---
+
+SPATIAL GRADIENT FEATURES IN FORECAST VERIFICATION:
+
+DEFINITION OF SPATIAL GRADIENT:
+The spatial gradient of a forecast field measures how rapidly predicted values change across neighboring grid points. A high spatial gradient in rainfall forecasts implies that one grid cell is predicted to receive significantly more or less rain than its neighbors.
+
+PHYSICAL INTERPRETATION:
+- In regions with sharp orographic boundaries (e.g., the windward vs. leeward sides of the Western Ghats), a high spatial gradient may represent a genuine, predictable physical feature.
+- However, high spatial gradients over flat terrain or at scales finer than the model's effective resolution (typically 3–5× the nominal grid spacing) often indicate numerical instabilities or poorly resolved convective triggering.
+- In either case, the presence of a high spatial gradient increases point-specific uncertainty: small errors in the spatial placement of a rainfall system translate to large errors at any specific grid point.
+
+RELATIONSHIP TO BUST RISK:
+- A well-known verification challenge is the "double penalty" for nearby misses: if a forecasted rain band is displaced by 50 km from where it actually occurred, every grid point in both the forecast and the observation receives a large error, even though the meteorological event was well-predicted overall.
+- Our spatial_gradient feature captures this effect: high gradient means that a small displacement error (which is common and plausible at medium range) will result in a large point error.
+- This is consistent with standard forecast verification theory: the same storm predicted 1 grid box away scores catastrophically on grid-point metrics.
+
+MESOSCALE CONVECTIVE SYSTEMS (MCS) AND CLUSTER UNCERTAINTY:
+Monsoon-season rainfall in India is frequently organized into MCSs — clusters of convective cells with a total horizontal extent of 100–500 km. NWP models capture MCS organization at Day 1–3 reasonably well, but the precise location, propagation speed, and intensity degrade rapidly by Day 5–7.
+
+High spatial_gradient in the ensemble forecast (members predicting different MCS locations) is a leading indicator of this uncertainty.
+
+PRACTICAL IMPLICATION FOR BUST PROBABILITY:
+When spatial_gradient is elevated (standard deviation of neighboring grid-point forecasts > 10 mm/day), our model assigns higher bust probability, consistent with the meteorological interpretation that:
+1. The forecast feature is at the margin of predictability.
+2. Small systematic errors will produce large local errors.
+3. Operational users should widen their planning uncertainty zone.

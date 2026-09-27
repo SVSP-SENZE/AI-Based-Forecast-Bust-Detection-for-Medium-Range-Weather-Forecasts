@@ -1,0 +1,46 @@
+SOURCE: Operational Forecast Communication and Decision-Support for Disaster Risk Reduction
+CITATION: WMO GDPFS Guidelines; IMD Operational Weather Forecast Communication Standards; IPCC SREX (2012) — Special Report on Extreme Events
+URL: https://community.wmo.int/en/activity-areas/pwi
+SECTION: Communicating Forecast Uncertainty to Non-Expert Operational Users
+
+---
+
+COMMUNICATING PROBABILISTIC FORECAST UNCERTAINTY:
+
+THE CHALLENGE:
+Operational users (disaster management officers, agricultural advisors, emergency planners) often lack meteorological training. Communicating probabilistic forecasts (P(bust) = 68%) in a way that is actionable without being misleading requires careful design.
+
+BEST PRACTICES FROM WMO AND OPERATIONAL METEOROLOGY:
+
+1. BAND LABELS OVER RAW PROBABILITIES:
+Presenting "Low Reliability" or "High Reliability" instead of "68% bust probability" is standard practice in operational systems (e.g., UK Met Office's public uncertainty indicators, ECMWF's probabilistic products). Band labels are more robust to probability miscalibration and easier to incorporate into decision frameworks.
+
+2. ANCHORING TO HISTORICAL CONTEXT:
+Instead of "68% probability," tell the user: "In similar historical situations, about 7 in 10 forecasts missed significantly." This grounds the probability in a tangible, understandable frame.
+
+3. ACTION-ORIENTED LANGUAGE:
+Good uncertainty communication specifies WHAT TO DO, not just the probability. For example:
+- Low Reliability (P ≥ 45%): "Consider contingency plans; monitor subsequent model runs for convergence"
+- Moderate Reliability (20% ≤ P < 45%): "Useful guidance; some uncertainty remains; verify with regional forecasters"
+- High Reliability (P < 20%): "Forecast expected to verify; proceed with normal planning"
+
+4. THE ROLE OF EXPLANATION:
+Providing a reason for low reliability (e.g., "high ensemble spread" or "long lead time") helps users assess whether the uncertainty source is generic or specifically relevant to their decision context.
+
+WHAT OUR SYSTEM DOES:
+Our RAG explanation layer takes the structured model output (bust probability, confidence band, SHAP top features) and generates a 3–5 sentence explanation in operational language that:
+- States the confidence band in plain terms
+- Identifies the meteorological driver(s) behind the uncertainty
+- Anchors claims to verified documentation (with citations)
+- Avoids claiming causal certainty or inventing facts the model didn't produce
+
+AVOIDING MISINTERPRETATION:
+- The RAG layer explicitly does NOT state that a bust will occur — only that the probability is elevated.
+- Probability labels should never be interpreted as deterministic predictions.
+- Users are reminded that all numbers come from the ML model, not the RAG system.
+
+DECISION-MAKER GUIDANCE FOR HIGH BUST-PROBABILITY SCENARIOS:
+1. Identify the decision horizon: If the forecast is for Day 7, how much will the bust probability update by Day 3 (when more information is available)?
+2. Consider asymmetric consequences: For disaster management, the cost of missing a true bust (Type II error) may greatly exceed the cost of over-preparing for a bust that doesn't occur (Type I error).
+3. Use the replay mode for calibration training: Historical cases showing the system's track record help users develop appropriate decision frameworks.
+4. Never act on bust probability alone: It is a decision-support signal, not a replacement for expert forecast judgment or for consulting additional data sources.

@@ -18,6 +18,13 @@ import datetime
 import numpy as np
 import pandas as pd
 
+# Ensure libomp path is set for XGBoost on macOS
+libomp_path = "/opt/homebrew/opt/libomp/lib"
+if os.path.exists(libomp_path):
+    existing = os.environ.get("DYLD_LIBRARY_PATH", "")
+    if libomp_path not in existing:
+        os.environ["DYLD_LIBRARY_PATH"] = f"{libomp_path}:{existing}" if existing else libomp_path
+
 ROOT_DIR   = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODELS_DIR = os.path.join(ROOT_DIR, "models")
 FEAT_PATH  = os.path.join(ROOT_DIR, "data", "processed", "features.parquet")

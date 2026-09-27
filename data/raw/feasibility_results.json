@@ -72,7 +72,7 @@
         1.8,
         3.3,
         5.0,
-        1.1,
+        0.6,
         0.1,
         2.3
       ],
@@ -113,7 +113,7 @@
         1.8,
         3.3,
         5.0,
-        1.1
+        0.6
       ]
     },
     "pairing": {
@@ -152,14 +152,14 @@
           "init": "2026-09-23",
           "valid": "2026-09-26",
           "forecast_mm": 1.8,
-          "obs_mm": 1.1,
-          "abs_error_mm": 0.7
+          "obs_mm": 0.6,
+          "abs_error_mm": 1.2000000000000002
         }
       ]
     }
   },
   "imd": {
-    "imdlib": "INSTALLED",
+    "imdlib": "NOT_INSTALLED",
     "imd_2021": {
       "status": "HTTP_404"
     },

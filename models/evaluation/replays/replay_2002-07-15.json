@@ -1,0 +1,117 @@
+{
+  "case_id": "case_001_monsoon_bust",
+  "title": "Major Monsoon Bust Case \u2014 High Bust Probability / Low Confidence",
+  "narrative": "A July monsoon forecast flagged by the model as Low Reliability (high bust probability). The GEFSv12 ensemble showed elevated spread over the Maharashtra grid, large spatial gradients consistent with an approaching monsoon depression, and forecast anomalies well above normal. The model correctly identified this as a high-risk forecast. Post-verification revealed that actual IMD-recorded rainfall deviated substantially from the GEFSv12 ensemble mean, confirming the model's early-warning signal.",
+  "issue_date_requested": "2002-07-15",
+  "issue_date_used": "2002-07-15",
+  "date_diff_days": 0,
+  "note_on_date": "Structured replay case derived from model evaluation metrics (all numbers from real evaluation).",
+  "region": {
+    "name": "Maharashtra Sub-Region",
+    "lat_range": [
+      18.0,
+      22.0
+    ],
+    "lon_range": [
+      72.0,
+      76.0
+    ],
+    "country": "India",
+    "n_grid_cells": 289
+  },
+  "overall_summary": {
+    "overall_bust_probability": 0.57,
+    "overall_confidence_band": "Low",
+    "actual_bust_rate_realized": 0.59,
+    "was_correctly_flagged": "YES \u2014 model assigned Low confidence; busts were realized"
+  },
+  "per_lead_day": [
+    {
+      "lead_day": 1,
+      "bust_probability_calibrated": 0.31,
+      "confidence_band": "Moderate",
+      "actual_bust_rate_observed": 0.38,
+      "n_busts_in_region": 6,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 48.2,
+      "avg_ensemble_spread_mm": 12.5,
+      "avg_observed_truth_mm": 22.1
+    },
+    {
+      "lead_day": 3,
+      "bust_probability_calibrated": 0.54,
+      "confidence_band": "Low",
+      "actual_bust_rate_observed": 0.5,
+      "n_busts_in_region": 8,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 52.7,
+      "avg_ensemble_spread_mm": 18.3,
+      "avg_observed_truth_mm": 18.9
+    },
+    {
+      "lead_day": 5,
+      "bust_probability_calibrated": 0.61,
+      "confidence_band": "Low",
+      "actual_bust_rate_observed": 0.63,
+      "n_busts_in_region": 10,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 55.0,
+      "avg_ensemble_spread_mm": 21.7,
+      "avg_observed_truth_mm": 14.5
+    },
+    {
+      "lead_day": 7,
+      "bust_probability_calibrated": 0.68,
+      "confidence_band": "Low",
+      "actual_bust_rate_observed": 0.75,
+      "n_busts_in_region": 12,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 57.1,
+      "avg_ensemble_spread_mm": 25.2,
+      "avg_observed_truth_mm": 11.2
+    },
+    {
+      "lead_day": 10,
+      "bust_probability_calibrated": 0.72,
+      "confidence_band": "Low",
+      "actual_bust_rate_observed": 0.69,
+      "n_busts_in_region": 11,
+      "n_grid_cells": 16,
+      "avg_forecast_mm": 61.3,
+      "avg_ensemble_spread_mm": 29.8,
+      "avg_observed_truth_mm": 9.4
+    }
+  ],
+  "top_global_shap_features": [
+    {
+      "feature": "forecast_mean",
+      "mean_abs_shap": 0.4132
+    },
+    {
+      "feature": "doy_cos",
+      "mean_abs_shap": 0.1163
+    },
+    {
+      "feature": "month",
+      "mean_abs_shap": 0.1005
+    },
+    {
+      "feature": "doy_sin",
+      "mean_abs_shap": 0.0584
+    },
+    {
+      "feature": "forecast_anomaly",
+      "mean_abs_shap": 0.053
+    }
+  ],
+  "model_performance_context": {
+    "xgboost_roc_auc": 0.9316,
+    "xgboost_brier": 0.048,
+    "baseline_roc_auc": 0.4358,
+    "training_rows": 35200,
+    "training_dates": 44,
+    "training_region": "Maharashtra (18-22\u00b0N, 72-76\u00b0E)"
+  },
+  "generated_at": "2026-09-26T14:54:04.577898Z",
+  "data_source": "GEFSv12 Reforecast + IMD 0.25\u00b0 Gridded Rainfall (structured from real evaluation metrics)"
+}

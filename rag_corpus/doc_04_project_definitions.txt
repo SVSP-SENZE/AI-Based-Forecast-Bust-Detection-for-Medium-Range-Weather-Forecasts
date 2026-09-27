@@ -1,0 +1,52 @@
+SOURCE: Project Definition Document — Bust Label and Confidence Definitions
+CITATION: This project's MODEL_METHODOLOGY.md (internal technical reference)
+URL: internal/MODEL_METHODOLOGY.md
+SECTION: Operational Definitions for Bust Probability, Confidence Bands, and Error Metrics
+
+---
+
+PROJECT-SPECIFIC DEFINITIONS (use these when explaining our model's outputs):
+
+FORECAST BUST (this project):
+A "forecast bust" in this system is defined as: for a given variable (rainfall), grid cell, lead time, and season, the realized forecast error falls in the top 15% of the historical error distribution for that exact stratum (lead-time bucket × region group × season). The threshold is empirically derived from the GEFSv12 reforecast and IMD 0.25° gridded truth data (2000–2004, Maharashtra sub-region).
+
+Error metric: |F - O| expressed as a percentile rank within the stratum-specific historical error distribution.
+Bust threshold: 85th percentile of that stratum's historical |F - O| distribution.
+Bust rate realized: 14.07% of all forecast-observation pairs in the training period are classified as busts under this definition.
+
+BUST PROBABILITY (this project):
+The calibrated output of an XGBoost gradient-boosted tree model, estimating P(bust | X) where X is the feature vector available at issue time. The model is calibrated via isotonic regression fitted on the validation fold (chronological 70/15/15 split).
+
+CONFIDENCE BAND:
+- High Reliability: bust probability < 20% — the model assigns low chance of a major miss; the forecast is expected to verify within the historical normal error range.
+- Moderate Reliability: 20% ≤ bust probability < 45% — meaningful uncertainty; the forecast may or may not verify; use additional cross-checks.
+- Low Reliability: bust probability ≥ 45% — model identifies this as a high-risk forecast; operational users should treat it with heightened caution and prepare contingency scenarios.
+
+FEATURE DEFINITIONS:
+- forecast_mean: ensemble mean rainfall forecast (mm/day) at the grid point for the valid time.
+- forecast_spread: standard deviation of ensemble members (mm/day) at that grid point. High spread → higher uncertainty.
+- forecast_range: range (max – min) of ensemble members (mm/day). Complementary to spread.
+- forecast_anomaly: forecast_mean – local climatological mean for that day-of-year and location. Positive = above-normal forecast.
+- spatial_gradient: standard deviation of forecast values at the 3×3 neighborhood of the grid point. High gradient → possible convective/frontal boundary nearby.
+- hist_bias: mean absolute error for this lead-time/season stratum computed from strictly historical (pre-issue-date) data. Indicates known systematic difficulty.
+- lead_day: lead time (1, 3, 5, 7, or 10 days). Higher lead → more uncertainty by construction.
+- doy_sin, doy_cos: cyclically encoded day-of-year to capture seasonal signal without discontinuity at December/January.
+- month: calendar month (1–12).
+
+WHAT THE MODEL DOES NOT DO:
+- It does not predict the direction or magnitude of the forecast error — only the probability of an unusually large miss.
+- It does not replace or recalibrate the underlying NWP (GEFSv12) forecast. The GEFSv12 forecast itself is the primary product; this system provides a reliability score on top.
+- It does not classify the meteorological regime (monsoon depression, western disturbance, etc.) — regime classification is future work.
+
+TRAINING DATA FACTS:
+- Geography: Maharashtra sub-region (18–22°N, 72–76°E) at ~0.25° grid resolution.
+- Period: 2000–2004 (GEFSv12 reforecast), 44 unique issue dates, 35,200 rows (5 lead times × multiple grid cells × 44 dates).
+- Variable: precipitation_sum (mm/day).
+- Truth source: IMD 0.25° gridded rainfall analysis (imdlib).
+- No synthetic data anywhere in the pipeline.
+
+MODEL PERFORMANCE (test set, chronological holdout, final 15% of issue dates):
+- XGBoost (calibrated): ROC-AUC 0.9316, PR-AUC 0.7907, Brier Score 0.0480
+- Logistic Regression: ROC-AUC 0.8597, PR-AUC 0.6744
+- Climatological Baseline: ROC-AUC 0.4358, PR-AUC 0.1044
+- XGBoost outperforms the climatological baseline by +0.4958 ROC-AUC points (a decisive improvement).

@@ -1,0 +1,27 @@
+SOURCE: India Meteorological Department — Southwest Monsoon Overview
+CITATION: IMD Annual Monsoon Report; IMD Monsoon Mission Documentation
+URL: https://imd.gov.in/pages/monsoon_main.php
+SECTION: Southwest Monsoon Characteristics and Variability
+
+---
+
+The Southwest Monsoon (June–September) is the primary rainfall-producing system for the Indian subcontinent, contributing approximately 75–80% of India's annual rainfall. It is driven by the differential heating between the Indian Ocean and the Asian landmass, creating a large-scale sea-breeze circulation that advects moisture from the Arabian Sea and Bay of Bengal into peninsular and central India.
+
+Onset of the monsoon over Kerala typically occurs around June 1, with a standard deviation of approximately 7–8 days. Arrival over Maharashtra and central India follows approximately 10–15 days after Kerala onset. The withdrawal sequence is the reverse of onset, beginning from northwest India in September.
+
+KEY PREDICTABILITY CHARACTERISTICS:
+- Active monsoon spells (3–5 days of above-normal rainfall) alternate with break monsoon periods (suppressed rainfall, hot and dry conditions) on intraseasonal timescales (30–60 day Madden-Julian Oscillation influence).
+- Monsoon troughs oscillate between positions near the Himalayas (active spell favoured) and near the coast (break spell). Forecast errors are higher during transitions.
+- Monsoon depressions, typically forming in the Bay of Bengal (3–6 per season historically), provide some of the most intense rainfall events. Their track and intensification exhibit limited predictability beyond 3–4 days.
+- Orographic enhancement over the Western Ghats produces sharp spatial gradients — the difference between windward and leeward rainfall can exceed 100 mm/day, making precise location of rainfall maxima inherently difficult to predict at coarse model resolution.
+
+FORECAST VERIFICATION CONTEXT:
+IMD's operational medium-range forecasts (issued at Day 1 through Day 10) have documented skill degradation with lead time. Day 1–3 forecasts show relatively high categorical skill (Hanssen-Kuipers Discriminant > 0.5 for heavy rain events in many subdivisions). By Day 5–7, skill decreases substantially for rainfall amount, though the large-scale monsoon circulation pattern may still be predictable.
+
+Forecast busts — defined as large relative errors at the grid scale — are disproportionately associated with: (1) the passage of monsoon depressions, (2) sudden active/break transitions, (3) Western Ghat orographic episodes with rapidly shifting wind direction, and (4) early-season or late-season periods when the monsoon boundary position is uncertain.
+
+VERIFICATION TERMINOLOGY:
+- Equitable Threat Score (ETS): standard metric for categorical rainfall forecasts
+- Brier Score: proper scoring rule for probabilistic forecasts; lower is better; 0 = perfect; 0.25 = climatology for 50% events
+- Reliability: correspondence between predicted probability and observed frequency
+- Bust: a specific, large miss relative to the local climatological error distribution, not simply any error

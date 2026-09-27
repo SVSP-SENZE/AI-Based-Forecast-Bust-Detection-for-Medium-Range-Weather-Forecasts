@@ -1,0 +1,43 @@
+SOURCE: GEFSv12 Reforecast Dataset — Technical Documentation
+CITATION: Hamill et al. (2022) "The Reanalysis-Based Global Ensemble Forecast System (GEFSv12) Reforecast Dataset"; NOAA PSL GEFSv12 documentation
+URL: https://psl.noaa.gov/forecasts/reforecast2/README_GEFSv12.pdf
+SECTION: GEFSv12 Reforecast Characteristics for Indian Monsoon Verification
+
+---
+
+GEFS v12 REFORECAST DATASET — TECHNICAL SUMMARY:
+
+OVERVIEW:
+The NOAA Global Ensemble Forecast System version 12 (GEFSv12) Reforecast provides a homogeneous, reanalysis-consistent set of ensemble forecasts for the period 2000–2019. Unlike operational archive data (which contains model upgrades that change characteristics over time), the GEFSv12 reforecast uses a single, fixed model version applied retrospectively, enabling unbiased statistical learning from historical forecast-error relationships.
+
+KEY SPECIFICATIONS:
+- Period: January 2000 – December 2019 (20 years)
+- Members: 1 control (c00) + 4 perturbed (p01–p04) = 5 total
+- Spatial resolution: approximately 0.25° × 0.25° (native T254 spectral, ~40 km)
+- Lead times: available at 3-hour intervals from Day 0 through Day 16
+- Variables: includes precipitation (APCP), temperature, wind, geopotential, humidity, and others
+- Storage format: GRIB2, available via NOAA S3 (s3://noaa-gefs-retrospective/)
+
+PRECIPITATION SPECIFICS:
+- Variable: APCP_SFC (accumulated precipitation, surface)
+- Accumulation periods: available as 6-hour, 12-hour, and 24-hour accumulations
+- Bias: GEFSv12 has a documented positive bias over orographic regions (Western Ghats) and a tendency to underestimate convective rainfall during active monsoon breaks
+- Ensemble spread: 5 members provide moderate spread estimates; fewer members than the 50-member operational EPS, so spread estimates are noisier
+
+SUITABILITY FOR BUST DETECTION:
+The GEFSv12 reforecast is uniquely well-suited for training a bust-detection model because:
+1. Fixed model version: no spurious error trends due to model upgrades
+2. Consistent initialization: uses ERA5 for initial conditions, providing homogeneous starting conditions
+3. Long record: 20 years provides stable statistical learning for seasonal/regional stratification
+4. Free public access: via NOAA S3, no API key required for research use
+
+LIMITATIONS RELEVANT TO OUR MODEL:
+- 5 members: ensemble-spread features derived from 5 members are noisier than from 50 members; our spread estimates have higher sampling uncertainty
+- Retrospective study only: the model represents GEFSv12's characteristics, not the current operational GEFSv12.1 or future versions
+- 2000–2004 training window: our current dataset uses only the first 5 years of the 20-year archive; expanding to the full 2000–2019 window would improve statistical robustness (Tier 2 roadmap item)
+
+IMD GRIDDED TRUTH DATASET:
+As the observational reference, we use the IMD 0.25° gridded daily rainfall dataset derived from station observations across India, accessed via the imdlib Python library. This dataset provides a homogeneous, quality-controlled daily rainfall reference from 1901–present, specifically designed for verification against gridded model output over India.
+
+FORECAST-TRUTH ALIGNMENT IN OUR SYSTEM:
+Our dataset joins GEFSv12 24-hour accumulated precipitation forecasts (00Z initialization, Day 1/3/5/7/10) with the corresponding IMD truth for the same valid date and grid cell. The alignment produces 35,200 rows across 44 unique issue dates, 5 lead times, and the Maharashtra grid (18–22°N, 72–76°E at 0.25° resolution), with 0.00% missing data.

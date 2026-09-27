@@ -1,0 +1,472 @@
+[
+  {
+    "chunk_id": "doc_01_imd_monsoon_overview_chunk0",
+    "doc_id": "doc_01_imd_monsoon_overview",
+    "source": "India Meteorological Department — Southwest Monsoon Overview",
+    "citation": "IMD Annual Monsoon Report; IMD Monsoon Mission Documentation",
+    "url": "https://imd.gov.in/pages/monsoon_main.php",
+    "section": "Southwest Monsoon Characteristics and Variability",
+    "text": "The Southwest Monsoon (June–September) is the primary rainfall-producing system for the Indian subcontinent, contributing approximately 75–80% of India's annual rainfall. It is driven by the differential heating between the Indian Ocean and the Asian landmass, creating a large-scale sea-breeze circulation that advects moisture from the Arabian Sea and Bay of Bengal into peninsular and central India.\n\nOnset of the monsoon over Kerala typically occurs around June 1, with a standard deviation of approximately 7–8 days. Arrival over Maharashtra and central India follows approximately 10–15 days after Kerala onset. The withdrawal sequence is the reverse of onset, beginning from northwest India in September.",
+    "approx_tokens": 176
+  },
+  {
+    "chunk_id": "doc_01_imd_monsoon_overview_chunk1",
+    "doc_id": "doc_01_imd_monsoon_overview",
+    "source": "India Meteorological Department — Southwest Monsoon Overview",
+    "citation": "IMD Annual Monsoon Report; IMD Monsoon Mission Documentation",
+    "url": "https://imd.gov.in/pages/monsoon_main.php",
+    "section": "Southwest Monsoon Characteristics and Variability",
+    "text": "7–8 days. Arrival over Maharashtra and central India follows approximately 10–15 days after Kerala onset. The withdrawal sequence is the reverse of onset, beginning from northwest India in September.\n\nKEY PREDICTABILITY CHARACTERISTICS:\n- Active monsoon spells (3–5 days of above-normal rainfall) alternate with break monsoon periods (suppressed rainfall, hot and dry conditions) on intraseasonal timescales (30–60 day Madden-Julian Oscillation influence).\n- Monsoon troughs oscillate between positions near the Himalayas (active spell favoured) and near the coast (break spell). Forecast errors are higher during transitions.\n- Monsoon depressions, typically forming in the Bay of Bengal (3–6 per season historically), provide some of the most intense rainfall events. Their track and intensification exhibit limited predictability beyond 3–4 days.\n- Orographic enhancement over the Western Ghats produces sharp spatial gradients — the difference between windward and leeward rainfall can exceed 100 mm/day, making precise location of rainfall maxima inherently difficult to predict at coarse model resolution.\n\nFORECAST VERIFICATION CONTEXT:\nIMD's operational medium-range forecasts (issued at Day 1 through Day 10) have documented skill degradation with lead time. Day 1–3 forecasts show relatively high categorical skill (Hanssen-Kuipers Discriminant > 0.5 for heavy rain events in many subdivisions). By Day 5–7, skill decreases substantially for rainfall amount, though the large-scale monsoon circulation pattern may still be predictable.",
+    "approx_tokens": 386
+  },
+  {
+    "chunk_id": "doc_01_imd_monsoon_overview_chunk2",
+    "doc_id": "doc_01_imd_monsoon_overview",
+    "source": "India Meteorological Department — Southwest Monsoon Overview",
+    "citation": "IMD Annual Monsoon Report; IMD Monsoon Mission Documentation",
+    "url": "https://imd.gov.in/pages/monsoon_main.php",
+    "section": "Southwest Monsoon Characteristics and Variability",
+    "text": "criminant > 0.5 for heavy rain events in many subdivisions). By Day 5–7, skill decreases substantially for rainfall amount, though the large-scale monsoon circulation pattern may still be predictable.\n\nForecast busts — defined as large relative errors at the grid scale — are disproportionately associated with: (1) the passage of monsoon depressions, (2) sudden active/break transitions, (3) Western Ghat orographic episodes with rapidly shifting wind direction, and (4) early-season or late-season periods when the monsoon boundary position is uncertain.\n\nVERIFICATION TERMINOLOGY:\n- Equitable Threat Score (ETS): standard metric for categorical rainfall forecasts\n- Brier Score: proper scoring rule for probabilistic forecasts; lower is better; 0 = perfect; 0.25 = climatology for 50% events\n- Reliability: correspondence between predicted probability and observed frequency\n- Bust: a specific, large miss relative to the local climatological error distribution, not simply any error",
+    "approx_tokens": 246
+  },
+  {
+    "chunk_id": "doc_02_wmo_forecast_verification_chunk0",
+    "doc_id": "doc_02_wmo_forecast_verification",
+    "source": "WMO — Forecast Verification: Methods and Applications",
+    "citation": "WMO-No. 485 (2018); Jolliffe & Stephenson (2012) Forecast Verification: A Practitioner's Guide",
+    "url": "https://library.wmo.int/idurl/4/38676",
+    "section": "Core Verification Concepts for Probabilistic and Deterministic Forecasts",
+    "text": "FORECAST VERIFICATION FUNDAMENTALS:\n\nForecast verification is the process of comparing forecasts with corresponding observations to assess their quality. The goal is not simply to measure accuracy but to diagnose the sources of forecast error and inform users about the reliability of forecast products.\n\nKEY DEFINITIONS:\n\nBIAS: The systematic tendency of a forecast to overestimate or underestimate the observed quantity. A rainfall forecast with positive bias consistently predicts more rainfall than observed on average.\n\nMEAN ABSOLUTE ERROR (MAE): Average of |F - O| across a sample. Appropriate for continuous variables with well-behaved distributions; pathological for rainfall when O ≈ 0 (division not involved, but very sensitive to dry-day errors dominating).\n\nPERCENTAGE ERROR / MAPE: Avoided for rainfall verification because near-zero observations produce undefined or infinite percentage errors. Standard WMO practice is to use anomaly-based or percentile-based error metrics for precipitation.\n\nANOMALY-BASED ERROR: E = |F_anom - O_anom| where anom = value minus local climatological normal. Removes mean bias and allows comparison across seasons/regions.\n\nPERCENTILE-BASED ERROR: Expressing each error as its rank within the historical error distribution for that location/season/lead-time stratum. This is the approach used in our bust-label construction — it avoids scale issues and directly identifies unusual errors.",
+    "approx_tokens": 353
+  },
+  {
+    "chunk_id": "doc_02_wmo_forecast_verification_chunk1",
+    "doc_id": "doc_02_wmo_forecast_verification",
+    "source": "WMO — Forecast Verification: Methods and Applications",
+    "citation": "WMO-No. 485 (2018); Jolliffe & Stephenson (2012) Forecast Verification: A Practitioner's Guide",
+    "url": "https://library.wmo.int/idurl/4/38676",
+    "section": "Core Verification Concepts for Probabilistic and Deterministic Forecasts",
+    "text": "the historical error distribution for that location/season/lead-time stratum. This is the approach used in our bust-label construction — it avoids scale issues and directly identifies unusual errors.\n\nRELIABILITY (CALIBRATION): A forecast system is reliable if, over many forecasts, the stated probability matches the observed frequency. E.g., among all events where the model says 70% probability, approximately 70% should actually occur. The reliability diagram plots predicted probability (x-axis) vs. observed frequency (y-axis); a perfectly calibrated system falls on the diagonal.\n\nSHARPNESS: The tendency of a forecast to predict high probabilities (near 0 or near 1) rather than near-climatology. High sharpness is only valuable when combined with good reliability.\n\nRESOLUTION: The ability of a forecast to discriminate between events and non-events. A forecast with good resolution assigns higher probabilities to events that actually occur.\n\nBRIER SCORE (BS): BS = (1/N) Σ (p_i - o_i)^2 where p_i is predicted probability and o_i is the binary outcome. Lower is better. Reference (climatology) score: p(bust) × (1 - p(bust)). Brier Skill Score (BSS) measures improvement over climatology reference.\n\nROC-AUC (Area Under ROC Curve): Discrimination ability; probability that a randomly chosen bust event is ranked higher than a randomly chosen non-bust event. AUC = 0.5: no skill (random); AUC = 1.0: perfect. Insensitive to calibration — a model can have high AUC but poor reliability.",
+    "approx_tokens": 371
+  },
+  {
+    "chunk_id": "doc_02_wmo_forecast_verification_chunk2",
+    "doc_id": "doc_02_wmo_forecast_verification",
+    "source": "WMO — Forecast Verification: Methods and Applications",
+    "citation": "WMO-No. 485 (2018); Jolliffe & Stephenson (2012) Forecast Verification: A Practitioner's Guide",
+    "url": "https://library.wmo.int/idurl/4/38676",
+    "section": "Core Verification Concepts for Probabilistic and Deterministic Forecasts",
+    "text": "chosen bust event is ranked higher than a randomly chosen non-bust event. AUC = 0.5: no skill (random); AUC = 1.0: perfect. Insensitive to calibration — a model can have high AUC but poor reliability.\n\nPR-AUC (Precision-Recall AUC): More informative than ROC-AUC under class imbalance (e.g., ~10–15% bust rate). Captures the tradeoff between precision (fraction of flagged events that actually bust) and recall (fraction of actual busts that are flagged).\n\nISOTONIC CALIBRATION: A non-parametric method for mapping raw model scores to calibrated probabilities by fitting a monotone step function (pool-adjacent violators algorithm). Requires a separate calibration/validation set. More flexible than Platt scaling but can overfit on small validation samples.\n\nLEAD-TIME SKILL DEGRADATION: A universal property of NWP forecasts. Skill (measured by any standard metric) decreases as lead time increases, reflecting the chaotic nature of atmospheric dynamics and the finite predictability horizon. The rate of degradation depends on scale: large-scale circulation patterns are predictable to ~10–14 days, while mesoscale convective events may be predictable for only 1–3 days. For rainfall forecasts over India, skill for heavy-rain events falls sharply beyond Day 5.",
+    "approx_tokens": 314
+  },
+  {
+    "chunk_id": "doc_02_wmo_forecast_verification_chunk3",
+    "doc_id": "doc_02_wmo_forecast_verification",
+    "source": "WMO — Forecast Verification: Methods and Applications",
+    "citation": "WMO-No. 485 (2018); Jolliffe & Stephenson (2012) Forecast Verification: A Practitioner's Guide",
+    "url": "https://library.wmo.int/idurl/4/38676",
+    "section": "Core Verification Concepts for Probabilistic and Deterministic Forecasts",
+    "text": "terns are predictable to ~10–14 days, while mesoscale convective events may be predictable for only 1–3 days. For rainfall forecasts over India, skill for heavy-rain events falls sharply beyond Day 5.\n\nBUST vs. STANDARD ERROR: A \"forecast bust\" specifically denotes an error in the tail of the error distribution — beyond the 85th–90th percentile of historical errors for a given stratum — not merely any non-zero error. By definition, using an 85th percentile threshold, approximately 15% of forecasts will be labelled busts (subject to the exact stratum composition).",
+    "approx_tokens": 142
+  },
+  {
+    "chunk_id": "doc_03_ecmwf_medium_range_predictability_chunk0",
+    "doc_id": "doc_03_ecmwf_medium_range_predictability",
+    "source": "ECMWF — Medium-Range Forecast Predictability and Ensemble Systems",
+    "citation": "ECMWF Technical Memoranda; Buizza et al. (2005) \"A comparison of the ECMWF, MSC and NCEP global ensemble prediction systems\"; ECMWF User Guide on IFS",
+    "url": "https://www.ecmwf.int/en/forecasts/documentation-and-support/medium-range-forecasts",
+    "section": "Ensemble Spread, Predictability Limits, and Forecast Uncertainty",
+    "text": "ECMWF ENSEMBLE PREDICTION SYSTEM (EPS):\n\nThe ECMWF EPS produces 50+1 ensemble members by perturbing initial conditions (singular vectors) and stochastic model physics (SPPT — Stochastically Perturbed Parameterization Tendencies). Ensemble spread is the standard deviation among members at any given grid point and time.\n\nENSEMBLE SPREAD AS A PREDICTABILITY PROXY:\n- When ensemble spread is large, the atmosphere's future state is more uncertain — the model is less confident about where the rainfall will occur and how much.\n- The ideal ensemble is \"reliable\" in the sense that spread (uncertainty estimate) matches root-mean-square error over many cases.\n- In practice, NWP ensembles are often slightly underdispersive (spread underestimates actual error), especially at short to medium range and for precipitation.\n\nSPREAD-ERROR CORRELATION:\n- Higher ensemble spread is positively correlated with higher forecast error, validating spread as an uncertainty indicator.\n- However, the relationship is noisy: low spread does not guarantee low error (deterministic busts can occur even when members agree), and high spread does not always mean a bust will occur.\n- The correlation coefficient between ensemble spread and absolute error for precipitation forecasts is typically 0.3–0.5 at medium range — informative but not deterministic.",
+    "approx_tokens": 330
+  },
+  {
+    "chunk_id": "doc_03_ecmwf_medium_range_predictability_chunk1",
+    "doc_id": "doc_03_ecmwf_medium_range_predictability",
+    "source": "ECMWF — Medium-Range Forecast Predictability and Ensemble Systems",
+    "citation": "ECMWF Technical Memoranda; Buizza et al. (2005) \"A comparison of the ECMWF, MSC and NCEP global ensemble prediction systems\"; ECMWF User Guide on IFS",
+    "url": "https://www.ecmwf.int/en/forecasts/documentation-and-support/medium-range-forecasts",
+    "section": "Ensemble Spread, Predictability Limits, and Forecast Uncertainty",
+    "text": "s mean a bust will occur.\n- The correlation coefficient between ensemble spread and absolute error for precipitation forecasts is typically 0.3–0.5 at medium range — informative but not deterministic.\n\nFORECAST REVISION SIGNAL:\n- When the same valid time is predicted by consecutive model runs (e.g., today's Day-5 forecast vs. yesterday's Day-6 forecast for the same valid date), large differences signal instability in the forecast.\n- Forecast revision volatility (the change between consecutive runs' predictions for the same valid time) is a recognized predictor of eventual bust risk. A forecast that changes little from run to run is more likely to verify correctly.\n- This is consistent with predictability theory: the signal-to-noise ratio for a specific feature improves as the feature approaches within a predictable window; large late-stage revisions indicate the feature was previously outside the predictable window.\n\nSPATIAL DISAGREEMENT BETWEEN GRID POINTS:\n- High spatial gradient in a forecast (neighboring grid points predicting very different rainfall amounts) can indicate either: (a) a genuine, well-resolved physical gradient (e.g., orographic enhancement), or (b) numerical noise at the model's effective resolution limit.\n- In cases of high spatial gradient coinciding with high ensemble spread, both factors compound the uncertainty. This combination is associated with elevated bust risk for point-specific verification.",
+    "approx_tokens": 360
+  },
+  {
+    "chunk_id": "doc_03_ecmwf_medium_range_predictability_chunk2",
+    "doc_id": "doc_03_ecmwf_medium_range_predictability",
+    "source": "ECMWF — Medium-Range Forecast Predictability and Ensemble Systems",
+    "citation": "ECMWF Technical Memoranda; Buizza et al. (2005) \"A comparison of the ECMWF, MSC and NCEP global ensemble prediction systems\"; ECMWF User Guide on IFS",
+    "url": "https://www.ecmwf.int/en/forecasts/documentation-and-support/medium-range-forecasts",
+    "section": "Ensemble Spread, Predictability Limits, and Forecast Uncertainty",
+    "text": "- In cases of high spatial gradient coinciding with high ensemble spread, both factors compound the uncertainty. This combination is associated with elevated bust risk for point-specific verification.\n\nMEDIUM-RANGE PREDICTABILITY LIMITS (INDIA):\n- The ECMWF S2S database and verification studies show that over tropical regions, including the Indian monsoon domain, 500 hPa geopotential is predictable to approximately 7–10 days, but precipitation is meaningful only to 3–5 days for event-scale (day-to-day) forecasts.\n- Large-scale monsoon phase (active vs. break) may be predictable to 10–14 days through MJO teleconnections.\n- Extreme rainfall events associated with monsoon depressions are predictable to only 1–4 days for intensity; track is somewhat more predictable.\n\nWESTERN DISTURBANCES (WDs):\n- WDs are eastward-propagating extratropical troughs embedded in the mid-latitude westerlies that affect northwest India and the Himalayas, especially in winter (December–March). During early monsoon (May–June), interaction of WDs with the pre-monsoon trough can produce extremely localized, difficult-to-forecast heavy rainfall events.\n- Predictability of WD-induced rainfall is limited by the interaction with orography: small errors in wind direction produce large errors in rainfall due to orographic locking. Lead-time skill for WD-associated events often falls off rapidly beyond Day 3.",
+    "approx_tokens": 348
+  },
+  {
+    "chunk_id": "doc_03_ecmwf_medium_range_predictability_chunk3",
+    "doc_id": "doc_03_ecmwf_medium_range_predictability",
+    "source": "ECMWF — Medium-Range Forecast Predictability and Ensemble Systems",
+    "citation": "ECMWF Technical Memoranda; Buizza et al. (2005) \"A comparison of the ECMWF, MSC and NCEP global ensemble prediction systems\"; ECMWF User Guide on IFS",
+    "url": "https://www.ecmwf.int/en/forecasts/documentation-and-support/medium-range-forecasts",
+    "section": "Ensemble Spread, Predictability Limits, and Forecast Uncertainty",
+    "text": "he interaction with orography: small errors in wind direction produce large errors in rainfall due to orographic locking. Lead-time skill for WD-associated events often falls off rapidly beyond Day 3.\n\nCLIMATOLOGICAL REFERENCE CONTEXT:\nFor establishing bust thresholds and climatological baselines: the 85th-percentile error threshold means that roughly 15 out of 100 forecasts will be classified as busts by construction. The climatological baseline model (predicting the historical bust rate for each stratum) has no discriminatory power beyond what the base rate provides.",
+    "approx_tokens": 143
+  },
+  {
+    "chunk_id": "doc_04_project_definitions_chunk0",
+    "doc_id": "doc_04_project_definitions",
+    "source": "Project Definition Document — Bust Label and Confidence Definitions",
+    "citation": "This project's MODEL_METHODOLOGY.md (internal technical reference)",
+    "url": "internal/MODEL_METHODOLOGY.md",
+    "section": "Operational Definitions for Bust Probability, Confidence Bands, and Error Metrics",
+    "text": "PROJECT-SPECIFIC DEFINITIONS (use these when explaining our model's outputs):\n\nFORECAST BUST (this project):\nA \"forecast bust\" in this system is defined as: for a given variable (rainfall), grid cell, lead time, and season, the realized forecast error falls in the top 15% of the historical error distribution for that exact stratum (lead-time bucket × region group × season). The threshold is empirically derived from the GEFSv12 reforecast and IMD 0.25° gridded truth data (2000–2004, Maharashtra sub-region).\n\nError metric: |F - O| expressed as a percentile rank within the stratum-specific historical error distribution.\nBust threshold: 85th percentile of that stratum's historical |F - O| distribution.\nBust rate realized: 14.07% of all forecast-observation pairs in the training period are classified as busts under this definition.\n\nBUST PROBABILITY (this project):\nThe calibrated output of an XGBoost gradient-boosted tree model, estimating P(bust | X) where X is the feature vector available at issue time. The model is calibrated via isotonic regression fitted on the validation fold (chronological 70/15/15 split).",
+    "approx_tokens": 279
+  },
+  {
+    "chunk_id": "doc_04_project_definitions_chunk1",
+    "doc_id": "doc_04_project_definitions",
+    "source": "Project Definition Document — Bust Label and Confidence Definitions",
+    "citation": "This project's MODEL_METHODOLOGY.md (internal technical reference)",
+    "url": "internal/MODEL_METHODOLOGY.md",
+    "section": "Operational Definitions for Bust Probability, Confidence Bands, and Error Metrics",
+    "text": "tree model, estimating P(bust | X) where X is the feature vector available at issue time. The model is calibrated via isotonic regression fitted on the validation fold (chronological 70/15/15 split).\n\nCONFIDENCE BAND:\n- High Reliability: bust probability < 20% — the model assigns low chance of a major miss; the forecast is expected to verify within the historical normal error range.\n- Moderate Reliability: 20% ≤ bust probability < 45% — meaningful uncertainty; the forecast may or may not verify; use additional cross-checks.\n- Low Reliability: bust probability ≥ 45% — model identifies this as a high-risk forecast; operational users should treat it with heightened caution and prepare contingency scenarios.",
+    "approx_tokens": 178
+  },
+  {
+    "chunk_id": "doc_04_project_definitions_chunk2",
+    "doc_id": "doc_04_project_definitions",
+    "source": "Project Definition Document — Bust Label and Confidence Definitions",
+    "citation": "This project's MODEL_METHODOLOGY.md (internal technical reference)",
+    "url": "internal/MODEL_METHODOLOGY.md",
+    "section": "Operational Definitions for Bust Probability, Confidence Bands, and Error Metrics",
+    "text": "al cross-checks.\n- Low Reliability: bust probability ≥ 45% — model identifies this as a high-risk forecast; operational users should treat it with heightened caution and prepare contingency scenarios.\n\nFEATURE DEFINITIONS:\n- forecast_mean: ensemble mean rainfall forecast (mm/day) at the grid point for the valid time.\n- forecast_spread: standard deviation of ensemble members (mm/day) at that grid point. High spread → higher uncertainty.\n- forecast_range: range (max – min) of ensemble members (mm/day). Complementary to spread.\n- forecast_anomaly: forecast_mean – local climatological mean for that day-of-year and location. Positive = above-normal forecast.\n- spatial_gradient: standard deviation of forecast values at the 3×3 neighborhood of the grid point. High gradient → possible convective/frontal boundary nearby.\n- hist_bias: mean absolute error for this lead-time/season stratum computed from strictly historical (pre-issue-date) data. Indicates known systematic difficulty.\n- lead_day: lead time (1, 3, 5, 7, or 10 days). Higher lead → more uncertainty by construction.\n- doy_sin, doy_cos: cyclically encoded day-of-year to capture seasonal signal without discontinuity at December/January.\n- month: calendar month (1–12).",
+    "approx_tokens": 308
+  },
+  {
+    "chunk_id": "doc_04_project_definitions_chunk3",
+    "doc_id": "doc_04_project_definitions",
+    "source": "Project Definition Document — Bust Label and Confidence Definitions",
+    "citation": "This project's MODEL_METHODOLOGY.md (internal technical reference)",
+    "url": "internal/MODEL_METHODOLOGY.md",
+    "section": "Operational Definitions for Bust Probability, Confidence Bands, and Error Metrics",
+    "text": "Higher lead → more uncertainty by construction.\n- doy_sin, doy_cos: cyclically encoded day-of-year to capture seasonal signal without discontinuity at December/January.\n- month: calendar month (1–12).\n\nWHAT THE MODEL DOES NOT DO:\n- It does not predict the direction or magnitude of the forecast error — only the probability of an unusually large miss.\n- It does not replace or recalibrate the underlying NWP (GEFSv12) forecast. The GEFSv12 forecast itself is the primary product; this system provides a reliability score on top.\n- It does not classify the meteorological regime (monsoon depression, western disturbance, etc.) — regime classification is future work.\n\nTRAINING DATA FACTS:\n- Geography: Maharashtra sub-region (18–22°N, 72–76°E) at ~0.25° grid resolution.\n- Period: 2000–2004 (GEFSv12 reforecast), 44 unique issue dates, 35,200 rows (5 lead times × multiple grid cells × 44 dates).\n- Variable: precipitation_sum (mm/day).\n- Truth source: IMD 0.25° gridded rainfall analysis (imdlib).\n- No synthetic data anywhere in the pipeline.\n\nMODEL PERFORMANCE (test set, chronological holdout, final 15% of issue dates):\n- XGBoost (calibrated): ROC-AUC 0.9316, PR-AUC 0.7907, Brier Score 0.0480\n- Logistic Regression: ROC-AUC 0.8597, PR-AUC 0.6744\n- Climatological Baseline: ROC-AUC 0.4358, PR-AUC 0.1044\n- XGBoost outperforms the climatological baseline by +0.4958 ROC-AUC points (a decisive improvement).",
+    "approx_tokens": 351
+  },
+  {
+    "chunk_id": "doc_05_noaa_ensemble_uncertainty_chunk0",
+    "doc_id": "doc_05_noaa_ensemble_uncertainty",
+    "source": "NOAA — Forecast Uncertainty, Ensemble Methods, and Communicating Probabilistic Forecasts",
+    "citation": "NOAA/NWS Service Assessment on Ensemble Use; NOAA Probabilistic Forecast Communication Guide",
+    "url": "https://www.nws.noaa.gov/ops/fcstops/probabilistic.htm",
+    "section": "Ensemble Spread, Spaghetti Diagrams, and Operational Use of Probabilistic Forecasts",
+    "text": "UNDERSTANDING ENSEMBLE FORECASTING:\n\nEnsemble forecasting addresses the fundamental problem that weather prediction is sensitive to initial conditions. A single (deterministic) model run cannot represent all plausible future states of the atmosphere. Ensemble systems generate multiple forecasts from slightly different initial conditions or model physics, providing a sample of possible futures.\n\nWHY FORECASTS GO WRONG — COMMON FAILURE MODES:\n\n1. INITIAL CONDITION ERRORS: Small errors in the initial state of the atmosphere grow exponentially due to atmospheric chaotic dynamics. Even with sophisticated data assimilation, observational gaps (especially over the Indian Ocean and data-sparse land areas) leave systematic uncertainties.\n\n2. MODEL STRUCTURAL ERRORS: All NWP models parameterize sub-grid-scale processes (convection, boundary layer turbulence, cloud microphysics). These parameterization choices introduce systematic biases that are most visible for convective-scale rainfall events.\n\n3. RAPIDLY EVOLVING SYNOPTIC SYSTEMS: Monsoon depressions, cyclones, and western disturbances can develop, intensify, or change track more rapidly than model guidance suggests. The NWP model may capture the system's existence but misplace it by 100–300 km, which translates to a large local error at any specific grid point.",
+    "approx_tokens": 327
+  },
+  {
+    "chunk_id": "doc_05_noaa_ensemble_uncertainty_chunk1",
+    "doc_id": "doc_05_noaa_ensemble_uncertainty",
+    "source": "NOAA — Forecast Uncertainty, Ensemble Methods, and Communicating Probabilistic Forecasts",
+    "citation": "NOAA/NWS Service Assessment on Ensemble Use; NOAA Probabilistic Forecast Communication Guide",
+    "url": "https://www.nws.noaa.gov/ops/fcstops/probabilistic.htm",
+    "section": "Ensemble Spread, Spaghetti Diagrams, and Operational Use of Probabilistic Forecasts",
+    "text": "nge track more rapidly than model guidance suggests. The NWP model may capture the system's existence but misplace it by 100–300 km, which translates to a large local error at any specific grid point.\n\n4. OROGRAPHIC EFFECTS: The Western Ghats, Eastern Ghats, and Himalayan foothills act as rainfall amplifiers. A 5–10° error in low-level wind direction can shift the orographic rainfall maximum by hundreds of kilometers, producing a very large local error even when the large-scale pattern is correct.\n\n5. MJO (Madden-Julian Oscillation) PHASE ERRORS: The MJO modulates monsoon rainfall on 30–60 day timescales. If the model's MJO phase is in error at day 5–7, its rainfall pattern over India will be systematically biased, affecting all lead times for approximately a week.\n\nENSEMBLE SPREAD AS AN EARLY WARNING SIGNAL:\n- High spread (large disagreement between ensemble members) is an observable, pre-verification signal that the model is uncertain. Operationally, a forecaster examining a spaghetti diagram with widely diverging ensemble tracks will naturally apply more caution.\n- Ensemble spread is correlated with eventual bust risk, though the correlation is imperfect. Our model uses ensemble spread as one of several features to estimate bust probability — it is a necessary but not sufficient condition.",
+    "approx_tokens": 326
+  },
+  {
+    "chunk_id": "doc_05_noaa_ensemble_uncertainty_chunk2",
+    "doc_id": "doc_05_noaa_ensemble_uncertainty",
+    "source": "NOAA — Forecast Uncertainty, Ensemble Methods, and Communicating Probabilistic Forecasts",
+    "citation": "NOAA/NWS Service Assessment on Ensemble Use; NOAA Probabilistic Forecast Communication Guide",
+    "url": "https://www.nws.noaa.gov/ops/fcstops/probabilistic.htm",
+    "section": "Ensemble Spread, Spaghetti Diagrams, and Operational Use of Probabilistic Forecasts",
+    "text": "d with eventual bust risk, though the correlation is imperfect. Our model uses ensemble spread as one of several features to estimate bust probability — it is a necessary but not sufficient condition.\n\nLEAD-TIME EFFECTS:\n- Day 1: Deterministic NWP is typically reliable; busts at Day 1 usually stem from very localized events (individual convective cells, small-scale orographic effects) below the model's grid resolution.\n- Day 3–5: The predictable signal-to-noise ratio is declining; synoptic-scale patterns are still useful but meso-scale details are poorly constrained.\n- Day 7–10: Only the largest-scale circulation features retain meaningful skill. Specific rainfall amounts are highly uncertain. Ensemble spread has grown substantially. Bust risk is inherently elevated.\n\nCOMMUNICATING UNCERTAINTY TO USERS:\nThe goal of probabilistic forecasts is not to predict a specific value but to communicate how confident forecasters are. A high bust-probability signal is not a prediction that the forecast will fail — it is a flag that heightened caution is warranted, contingency plans should be activated, and the forecast should be monitored for significant revision in subsequent model runs.\n\nOPERATIONAL IMPLICATIONS FOR DISASTER MANAGEMENT:\nA calibrated bust probability of 60% for Day 7 over a given district means: historically, about 60% of similar situations produced an unusually large miss. A decision-maker should plan for both scenarios — the forecast verifying and the forecast busting — rather than betting on one outcome.",
+    "approx_tokens": 382
+  },
+  {
+    "chunk_id": "doc_06_spatial_gradient_predictability_chunk0",
+    "doc_id": "doc_06_spatial_gradient_predictability",
+    "source": "Spatial Disagreement and Convective-Scale Predictability in Monsoon Forecasts",
+    "citation": "Hohenegger & Schär (2007) \"Atmospheric predictability at synoptic versus cloud-resolving scales\"; Stensrud et al. (2009) \"Convective-scale warn-on-forecast system\"",
+    "url": "https://doi.org/10.1175/BAMS-88-11-1783",
+    "section": "Spatial Forecast Gradients as Bust Risk Indicators",
+    "text": "SPATIAL GRADIENT FEATURES IN FORECAST VERIFICATION:\n\nDEFINITION OF SPATIAL GRADIENT:\nThe spatial gradient of a forecast field measures how rapidly predicted values change across neighboring grid points. A high spatial gradient in rainfall forecasts implies that one grid cell is predicted to receive significantly more or less rain than its neighbors.\n\nPHYSICAL INTERPRETATION:\n- In regions with sharp orographic boundaries (e.g., the windward vs. leeward sides of the Western Ghats), a high spatial gradient may represent a genuine, predictable physical feature.\n- However, high spatial gradients over flat terrain or at scales finer than the model's effective resolution (typically 3–5× the nominal grid spacing) often indicate numerical instabilities or poorly resolved convective triggering.\n- In either case, the presence of a high spatial gradient increases point-specific uncertainty: small errors in the spatial placement of a rainfall system translate to large errors at any specific grid point.",
+    "approx_tokens": 248
+  },
+  {
+    "chunk_id": "doc_06_spatial_gradient_predictability_chunk1",
+    "doc_id": "doc_06_spatial_gradient_predictability",
+    "source": "Spatial Disagreement and Convective-Scale Predictability in Monsoon Forecasts",
+    "citation": "Hohenegger & Schär (2007) \"Atmospheric predictability at synoptic versus cloud-resolving scales\"; Stensrud et al. (2009) \"Convective-scale warn-on-forecast system\"",
+    "url": "https://doi.org/10.1175/BAMS-88-11-1783",
+    "section": "Spatial Forecast Gradients as Bust Risk Indicators",
+    "text": "her case, the presence of a high spatial gradient increases point-specific uncertainty: small errors in the spatial placement of a rainfall system translate to large errors at any specific grid point.\n\nRELATIONSHIP TO BUST RISK:\n- A well-known verification challenge is the \"double penalty\" for nearby misses: if a forecasted rain band is displaced by 50 km from where it actually occurred, every grid point in both the forecast and the observation receives a large error, even though the meteorological event was well-predicted overall.\n- Our spatial_gradient feature captures this effect: high gradient means that a small displacement error (which is common and plausible at medium range) will result in a large point error.\n- This is consistent with standard forecast verification theory: the same storm predicted 1 grid box away scores catastrophically on grid-point metrics.\n\nMESOSCALE CONVECTIVE SYSTEMS (MCS) AND CLUSTER UNCERTAINTY:\nMonsoon-season rainfall in India is frequently organized into MCSs — clusters of convective cells with a total horizontal extent of 100–500 km. NWP models capture MCS organization at Day 1–3 reasonably well, but the precise location, propagation speed, and intensity degrade rapidly by Day 5–7.\n\nHigh spatial_gradient in the ensemble forecast (members predicting different MCS locations) is a leading indicator of this uncertainty.",
+    "approx_tokens": 340
+  },
+  {
+    "chunk_id": "doc_06_spatial_gradient_predictability_chunk2",
+    "doc_id": "doc_06_spatial_gradient_predictability",
+    "source": "Spatial Disagreement and Convective-Scale Predictability in Monsoon Forecasts",
+    "citation": "Hohenegger & Schär (2007) \"Atmospheric predictability at synoptic versus cloud-resolving scales\"; Stensrud et al. (2009) \"Convective-scale warn-on-forecast system\"",
+    "url": "https://doi.org/10.1175/BAMS-88-11-1783",
+    "section": "Spatial Forecast Gradients as Bust Risk Indicators",
+    "text": "n, propagation speed, and intensity degrade rapidly by Day 5–7.\n\nHigh spatial_gradient in the ensemble forecast (members predicting different MCS locations) is a leading indicator of this uncertainty.\n\nPRACTICAL IMPLICATION FOR BUST PROBABILITY:\nWhen spatial_gradient is elevated (standard deviation of neighboring grid-point forecasts > 10 mm/day), our model assigns higher bust probability, consistent with the meteorological interpretation that:\n1. The forecast feature is at the margin of predictability.\n2. Small systematic errors will produce large local errors.\n3. Operational users should widen their planning uncertainty zone.",
+    "approx_tokens": 158
+  },
+  {
+    "chunk_id": "doc_07_lead_time_skill_degradation_chunk0",
+    "doc_id": "doc_07_lead_time_skill_degradation",
+    "source": "Lead-Time Skill Degradation in Medium-Range NWP Forecasts",
+    "citation": "Richardson (2001) \"Measures of skill and value of ensemble prediction systems, their interrelationship and the effect of ensemble size\"; Buizza (2008) \"The value of probabilistic prediction\"",
+    "url": "https://doi.org/10.1256/qj.00.92",
+    "section": "Quantitative Lead-Time Skill Degradation for Tropical Rainfall",
+    "text": "LEAD TIME AND FORECAST SKILL:\n\nTHEORETICAL FRAMEWORK:\nAtmospheric predictability arises from the finite growth rate of initial condition errors. For synoptic-scale extratropical systems, skill typically halves every 2–3 days. For tropical systems including monsoon rainfall, the fundamental Lorenz predictability limit is approximately 2 weeks, but practical skill (ROC-AUC or Brier Skill Score above 0) for precipitation events falls off much faster.\n\nEMPIRICAL LEAD-TIME SKILL GRADIENT FOR INDIA RAINFALL:\nFrom verification studies including ECMWF ERA5 and MERRA-2 reanalysis vs. GCM forecasts:\n- Day 1: ROC-AUC for heavy rainfall events typically 0.85–0.95 (high skill)\n- Day 3: ROC-AUC 0.75–0.85 (moderate-high skill)  \n- Day 5: ROC-AUC 0.65–0.75 (moderate skill, degrading noticeably)\n- Day 7: ROC-AUC 0.55–0.65 (near-climatological skill for specific events)\n- Day 10: ROC-AUC ~0.50–0.60 (minimal residual skill beyond climatology)\n\nNote: Our XGBoost bust-probability model captures this gradient through the lead_day feature and its interactions, producing ROC-AUC values of: Day 1 = 0.983, Day 3 = 0.891, Day 5 = 0.974, Day 7 = 0.914, Day 10 = 0.923 for the bust-detection task specifically.\n\nThe non-monotonic pattern (Day 5 showing higher AUC than Day 3) reflects features of the training data and the specific stratum composition (monsoon season concentrating errors differently), not a physical reversal of predictability.",
+    "approx_tokens": 356
+  },
+  {
+    "chunk_id": "doc_07_lead_time_skill_degradation_chunk1",
+    "doc_id": "doc_07_lead_time_skill_degradation",
+    "source": "Lead-Time Skill Degradation in Medium-Range NWP Forecasts",
+    "citation": "Richardson (2001) \"Measures of skill and value of ensemble prediction systems, their interrelationship and the effect of ensemble size\"; Buizza (2008) \"The value of probabilistic prediction\"",
+    "url": "https://doi.org/10.1256/qj.00.92",
+    "section": "Quantitative Lead-Time Skill Degradation for Tropical Rainfall",
+    "text": "showing higher AUC than Day 3) reflects features of the training data and the specific stratum composition (monsoon season concentrating errors differently), not a physical reversal of predictability.\n\nWHY LEAD TIME IS A FEATURE (NOT A MODEL SPLIT):\nRather than training separate models for each lead time, the single XGBoost model uses lead_day as a feature, allowing it to learn:\n1. The average skill degradation as lead time increases.\n2. Non-linear interactions between lead time and other features (e.g., the effect of high ensemble spread is more damaging at Day 7 than at Day 1, because there is less time for the forecast to self-correct through subsequent model runs).\n\nLONG-RANGE FORECAST CONTEXT (DAYS 7–10):\nAt these lead times, the forecast should not be interpreted as a precise point prediction. Rather:\n- The model is attempting to predict the large-scale circulation pattern (e.g., monsoon trough position, MJO phase).\n- Specific rainfall amounts are highly uncertain.\n- Bust probability at Day 7–10 is expected to be higher on average, and the confidence band for most grid points will tend toward Moderate or Low Reliability.\n- This is correct behavior, not a model failure — it accurately reflects the inherent limits of medium-range prediction.",
+    "approx_tokens": 315
+  },
+  {
+    "chunk_id": "doc_07_lead_time_skill_degradation_chunk2",
+    "doc_id": "doc_07_lead_time_skill_degradation",
+    "source": "Lead-Time Skill Degradation in Medium-Range NWP Forecasts",
+    "citation": "Richardson (2001) \"Measures of skill and value of ensemble prediction systems, their interrelationship and the effect of ensemble size\"; Buizza (2008) \"The value of probabilistic prediction\"",
+    "url": "https://doi.org/10.1256/qj.00.92",
+    "section": "Quantitative Lead-Time Skill Degradation for Tropical Rainfall",
+    "text": "fidence band for most grid points will tend toward Moderate or Low Reliability.\n- This is correct behavior, not a model failure — it accurately reflects the inherent limits of medium-range prediction.\n\nPRACTICAL GUIDANCE FOR USERS:\nFor any forecast with lead_day ≥ 7:\n- The primary value is identifying large-scale wet/dry signals, not pinpoint rainfall totals.\n- Bust probability naturally trends higher (15–25% range is typical at Day 7–10 even for \"good\" forecasts).\n- If the model additionally flags high spread, high spatial gradient, or high hist_bias, these compound the lead-time uncertainty.\n- Action: plan for the possibility of bust while continuing to monitor subsequent model runs for convergence.",
+    "approx_tokens": 177
+  },
+  {
+    "chunk_id": "doc_08_monsoon_depression_predictability_chunk0",
+    "doc_id": "doc_08_monsoon_depression_predictability",
+    "source": "Monsoon Depression Predictability and Track Forecasting",
+    "citation": "Sandeep et al. (2018) \"Predictability of monsoon low-pressure systems\"; IMD Technical Notes on Monsoon Depressions",
+    "url": "https://imd.gov.in/pages/cyclone_history.php",
+    "section": "Monsoon Depressions as High Bust-Risk Events",
+    "text": "MONSOON DEPRESSIONS — DEFINITION AND CHARACTERISTICS:\n\nA monsoon depression is a synoptic-scale low-pressure system (minimum 3 closed isobars at sea level) that typically forms in the Bay of Bengal during the active monsoon season (July–September). It is a weaker system than a tropical cyclone but can produce extremely heavy rainfall (> 100 mm/day) over large areas as it tracks westward or northwestward across the Indian subcontinent.\n\nKEY CHARACTERISTICS:\n- Formation region: primarily Bay of Bengal (85–90°E, 15–22°N) during monsoon season.\n- Track: typically moves WNW toward Odisha/Andhra Pradesh, then northward or westward across central India (Chhattisgarh, Madhya Pradesh, Maharashtra).\n- Duration: 3–7 days as a depression; may weaken as it moves inland and loses moisture source.\n- Rainfall: 50–200 mm/day in the core; large spatial gradient between the vortex core and surroundings.\n\nHISTORICAL FREQUENCY: India records approximately 3–6 monsoon depressions per season historically, with interannual variability.\n\nPREDICTABILITY CHARACTERISTICS (HIGH BUST RISK):\n1. Track predictability: NWP models typically predict the track to within 200–300 km at Day 2–3. Beyond Day 5, track errors compound rapidly. A 200 km track error at Day 5 means the forecast maximum rainfall may be placed entirely in the wrong administrative district.\n\n2. Intensity predictability: Depression intensity (central pressure, rainfall rate) is less predictable than track. Rapid weakening over land is particularly hard to predict.",
+    "approx_tokens": 376
+  },
+  {
+    "chunk_id": "doc_08_monsoon_depression_predictability_chunk1",
+    "doc_id": "doc_08_monsoon_depression_predictability",
+    "source": "Monsoon Depression Predictability and Track Forecasting",
+    "citation": "Sandeep et al. (2018) \"Predictability of monsoon low-pressure systems\"; IMD Technical Notes on Monsoon Depressions",
+    "url": "https://imd.gov.in/pages/cyclone_history.php",
+    "section": "Monsoon Depressions as High Bust-Risk Events",
+    "text": "administrative district.\n\n2. Intensity predictability: Depression intensity (central pressure, rainfall rate) is less predictable than track. Rapid weakening over land is particularly hard to predict.\n\n3. Spatial rainfall gradient: The depression's rainfall is spatially concentrated, with a steep gradient from core to periphery. This amplifies the \"double penalty\" problem — a small track error produces large errors at specific grid points.\n\n4. Phase with monsoon trough: When the monsoon trough is also active, the combined rainfall can exceed model predictions. The interaction between the depression and the trough is poorly captured at medium range.\n\nBUST RISK SIGNATURE FOR DEPRESSION EVENTS:\n- High ensemble spread in track position.\n- High spatial_gradient in the rainfall forecast (steep core/periphery gradient reflected in the model output).\n- High forecast_mean and forecast_anomaly (above-normal rainfall predicted near the center).\n- Elevated hist_bias for the relevant lead times and season — monsoon depressions are historically among the hardest events to verify.\n\nIMPLICATIONS FOR OUR MODEL:\nOur bust-detection model does not explicitly know whether a monsoon depression is present (regime classification is not built in the MVP). However, the feature signature of depression events (high spread, high spatial gradient, high forecast anomaly) naturally feeds into the model and tends to produce higher bust probability — consistent with what the physical literature predicts.",
+    "approx_tokens": 370
+  },
+  {
+    "chunk_id": "doc_08_monsoon_depression_predictability_chunk2",
+    "doc_id": "doc_08_monsoon_depression_predictability",
+    "source": "Monsoon Depression Predictability and Track Forecasting",
+    "citation": "Sandeep et al. (2018) \"Predictability of monsoon low-pressure systems\"; IMD Technical Notes on Monsoon Depressions",
+    "url": "https://imd.gov.in/pages/cyclone_history.php",
+    "section": "Monsoon Depressions as High Bust-Risk Events",
+    "text": "events (high spread, high spatial gradient, high forecast anomaly) naturally feeds into the model and tends to produce higher bust probability — consistent with what the physical literature predicts.\n\nMAHARASHTRA CONTEXT:\nMaharashtra (our training region, 18–22°N, 72–76°E) is affected by monsoon depressions that cross the Deccan plateau, typically 3–7 days after Bay of Bengal formation. The Western Ghats act as a major orographic driver, making the spatial placement of rainfall cores highly sensitive to the exact depression track and its interaction with the pre-existing orographic flow.",
+    "approx_tokens": 148
+  },
+  {
+    "chunk_id": "doc_09_historical_bias_feature_chunk0",
+    "doc_id": "doc_09_historical_bias_feature",
+    "source": "Historical Forecast Biases and Systematic Errors in NWP Over India",
+    "citation": "Mukhopadhyay et al. (2019) \"Climate mean state and forecast biases in the NCEP GFS model over India\"; Krishnamurthy & Shukla (2000) \"Intraseasonal and interannual variability of rainfall over India\"",
+    "url": "https://doi.org/10.1175/JCLI-D-18-0649.1",
+    "section": "Historical Bias Features and Their Role in Bust Prediction",
+    "text": "SYSTEMATIC FORECAST BIASES OVER INDIA:\n\nDEFINITION OF HISTORICAL BIAS (hist_bias feature):\nhist_bias is the mean absolute error (MAE) computed from all historical forecast-observation pairs for the same stratum (lead time × season × region) that occurred strictly before the current forecast's issue date. It represents the \"known difficulty\" of this specific forecast type, based entirely on past performance.\n\nWHY HISTORICAL BIAS IS A PREDICTIVE FEATURE:\nModel biases are not random — they are often systematic and persistent. A region/season/lead-time combination that has historically produced large errors tends to continue doing so, because the underlying causes (orographic effects, parameterization errors, boundary layer representation) are fixed properties of the NWP model.\n\nIncluding historical bias as a feature allows our XGBoost model to learn: \"forecasts for this region, in this season, at this lead time, have historically been harder to verify — the prior probability of a bust is higher regardless of the current forecast values.\"",
+    "approx_tokens": 260
+  },
+  {
+    "chunk_id": "doc_09_historical_bias_feature_chunk1",
+    "doc_id": "doc_09_historical_bias_feature",
+    "source": "Historical Forecast Biases and Systematic Errors in NWP Over India",
+    "citation": "Mukhopadhyay et al. (2019) \"Climate mean state and forecast biases in the NCEP GFS model over India\"; Krishnamurthy & Shukla (2000) \"Intraseasonal and interannual variability of rainfall over India\"",
+    "url": "https://doi.org/10.1175/JCLI-D-18-0649.1",
+    "section": "Historical Bias Features and Their Role in Bust Prediction",
+    "text": "to learn: \"forecasts for this region, in this season, at this lead time, have historically been harder to verify — the prior probability of a bust is higher regardless of the current forecast values.\"\n\nMAJOR DOCUMENTED BIASES IN NCEP MODELS (RELEVANT TO OUR GEFS TRAINING DATA):\n1. Wet bias over orographic regions: GFS/GEFS tends to overestimate rainfall over the Western Ghats windward slopes, especially at higher resolution. This produces large absolute errors when observed rainfall is actually lower (suppressed by local circulations the model misrepresents).\n2. Dry bias during break monsoon: During break monsoon phases (monsoon trough shifted north), GFS/GEFS sometimes underestimates the rainfall in the trough region.\n3. Phase errors in diurnal cycle: Convective rainfall over the Deccan Plateau peaks in the evening in observations, but GFS simulates a midday peak. This produces systematic timing errors at Day 1.\n4. Monsoon onset timing bias: GFS/GEFS sometimes advances or delays the monsoon onset by 2–4 days, causing large errors in the first 1–2 weeks of the monsoon season.\n\nLEAKAGE-SAFE COMPUTATION:\nOur hist_bias feature is computed strictly on data preceding each row's issue date — it is recalculated per fold in the temporal validation scheme. This prevents data leakage while ensuring the feature captures genuine historical difficulty.",
+    "approx_tokens": 339
+  },
+  {
+    "chunk_id": "doc_09_historical_bias_feature_chunk2",
+    "doc_id": "doc_09_historical_bias_feature",
+    "source": "Historical Forecast Biases and Systematic Errors in NWP Over India",
+    "citation": "Mukhopadhyay et al. (2019) \"Climate mean state and forecast biases in the NCEP GFS model over India\"; Krishnamurthy & Shukla (2000) \"Intraseasonal and interannual variability of rainfall over India\"",
+    "url": "https://doi.org/10.1175/JCLI-D-18-0649.1",
+    "section": "Historical Bias Features and Their Role in Bust Prediction",
+    "text": "y on data preceding each row's issue date — it is recalculated per fold in the temporal validation scheme. This prevents data leakage while ensuring the feature captures genuine historical difficulty.\n\nPRACTICAL INTERPRETATION:\nWhen hist_bias is elevated (e.g., > 15 mm/day for a rainfall stratum), the rule-based explanation layer surfaces: \"Historically large errors for this region/lead/season (avg {hist_bias} mm).\" This correctly communicates to operational users that this specific forecast type has a track record of being hard to verify, independent of what the current model run shows.\n\nGEFSv12 REFORECAST CONTEXT:\nThe GEFSv12 reforecast (2000–2019, 5 ensemble members) is a homogeneous, bias-stable dataset: the model version is fixed, so biases measured in 2000–2004 (our training window) are representative of the overall model's characteristics for verification purposes. This is a key advantage over using operational model data that changes with each NWP model upgrade.",
+    "approx_tokens": 245
+  },
+  {
+    "chunk_id": "doc_10_maharashtra_rainfall_climatology_chunk0",
+    "doc_id": "doc_10_maharashtra_rainfall_climatology",
+    "source": "Heavy Rainfall Events Over Maharashtra — Predictability and Climatology",
+    "citation": "IMD Annual Monsoon Reports; Gadgil (2003) \"The Indian Monsoon and its variability\"; IMD District-level Rainfall Statistics",
+    "url": "https://imd.gov.in/pages/rainfall_main.php",
+    "section": "Maharashtra Regional Climatology and Extreme Rainfall Patterns",
+    "text": "MAHARASHTRA CLIMATE AND RAINFALL CLIMATOLOGY:\n\nGEOGRAPHIC SETTING:\nMaharashtra (18–22°N, 72–76°E) spans the Western Ghats and the interior Deccan Plateau:\n- Western Ghats (Konkan coast, windward): highest rainfall in India, 2000–5000 mm/year, driven by orographic enhancement of Southwest Monsoon moisture.\n- Sahyadri mountain ridges (1000–1500 m elevation) create a strong rainfall shadow.\n- Interior Maharashtra (Vidarbha, Marathwada): 600–900 mm/year, highly variable, dominated by monsoon depressions and occasional cyclonic systems.\n\nSEASONAL RAINFALL DISTRIBUTION:\n- June: 15–20% of annual total; highly variable (onset uncertainty)\n- July: 25–30% of annual total; peak monsoon\n- August: 20–25%\n- September: 15–20%; withdrawal begins NW first\n- October–May: < 5%; rabi crop moisture, winter western disturbances\n\nEXTREME RAINFALL EVENTS:\nMaharashtra has recorded some of India's most extreme single-day rainfall:\n- July 26, 2005 (Mumbai): 944 mm in 24 hours — one of the highest single-day totals globally; the event was poorly predicted by NWP models (a notable historical forecast bust).\n- Maharashtra Vidarbha: Frequent convective events in August–September producing localized > 200 mm/day, associated with monsoon depressions.",
+    "approx_tokens": 306
+  },
+  {
+    "chunk_id": "doc_10_maharashtra_rainfall_climatology_chunk1",
+    "doc_id": "doc_10_maharashtra_rainfall_climatology",
+    "source": "Heavy Rainfall Events Over Maharashtra — Predictability and Climatology",
+    "citation": "IMD Annual Monsoon Reports; Gadgil (2003) \"The Indian Monsoon and its variability\"; IMD District-level Rainfall Statistics",
+    "url": "https://imd.gov.in/pages/rainfall_main.php",
+    "section": "Maharashtra Regional Climatology and Extreme Rainfall Patterns",
+    "text": "dicted by NWP models (a notable historical forecast bust).\n- Maharashtra Vidarbha: Frequent convective events in August–September producing localized > 200 mm/day, associated with monsoon depressions.\n\nHISTORICAL FORECAST ERROR CONTEXT:\nRainfall in western Maharashtra shows some of the highest forecast error variability in India, partly because:\n1. The Ghats orographic signal is strong but very localized — small errors in wind direction translate to large rainfall errors.\n2. The monsoon trough position oscillates, producing active/break cycles where the forecast can be systematically wrong for 3–5 days.\n3. Arabian Sea moisture surges (LLJ — Low Level Jet intensification) can rapidly increase Konkan coast rainfall in ways that only medium-range ensemble spread captures, not deterministic runs.\n\nBUST-PRONE SCENARIOS FOR MAHARASHTRA:\n1. Pre-monsoon season (June before onset): Model places onset 3–5 days too early or late.\n2. Active-to-break transition: Model continues predicting active monsoon rainfall for 1–3 extra days.\n3. Monsoon depression landfall: As described in doc_08; track error of 100–200 km displaces the heavy-rain core to a different district.\n4. Arabian Sea surge: Sudden intensification of the South Asian Low-Level Jet increases moisture flux faster than the model captures in subsequent runs.",
+    "approx_tokens": 329
+  },
+  {
+    "chunk_id": "doc_10_maharashtra_rainfall_climatology_chunk2",
+    "doc_id": "doc_10_maharashtra_rainfall_climatology",
+    "source": "Heavy Rainfall Events Over Maharashtra — Predictability and Climatology",
+    "citation": "IMD Annual Monsoon Reports; Gadgil (2003) \"The Indian Monsoon and its variability\"; IMD District-level Rainfall Statistics",
+    "url": "https://imd.gov.in/pages/rainfall_main.php",
+    "section": "Maharashtra Regional Climatology and Extreme Rainfall Patterns",
+    "text": "es the heavy-rain core to a different district.\n4. Arabian Sea surge: Sudden intensification of the South Asian Low-Level Jet increases moisture flux faster than the model captures in subsequent runs.\n\nGRID RESOLUTION LIMITATIONS:\nThe GEFSv12 model at its native ~0.25° resolution represents the large-scale monsoon circulation well but cannot resolve:\n- Individual convective cells (< 10 km scale)\n- Sub-grid orographic enhancements along narrow ridge sections\n- Sea-breeze interactions with coastal orography\n\nThis resolution limitation is an inherent source of forecast error that our model learns as part of the hist_bias for the Maharashtra stratum.\n\nIMPLICATIONS FOR CONFIDENCE ASSESSMENT:\nFor Maharashtra forecasts with high forecast_mean (> 50 mm/day), high forecast_anomaly (> 20 mm above normal), or high spatial_gradient (indicating an orographically sensitive placement), the model correctly assigns elevated bust probability, consistent with the documented historical difficulty of verifying heavy-rain events in this region.",
+    "approx_tokens": 257
+  },
+  {
+    "chunk_id": "doc_11_gefsv12_dataset_chunk0",
+    "doc_id": "doc_11_gefsv12_dataset",
+    "source": "GEFSv12 Reforecast Dataset — Technical Documentation",
+    "citation": "Hamill et al. (2022) \"The Reanalysis-Based Global Ensemble Forecast System (GEFSv12) Reforecast Dataset\"; NOAA PSL GEFSv12 documentation",
+    "url": "https://psl.noaa.gov/forecasts/reforecast2/README_GEFSv12.pdf",
+    "section": "GEFSv12 Reforecast Characteristics for Indian Monsoon Verification",
+    "text": "GEFS v12 REFORECAST DATASET — TECHNICAL SUMMARY:\n\nOVERVIEW:\nThe NOAA Global Ensemble Forecast System version 12 (GEFSv12) Reforecast provides a homogeneous, reanalysis-consistent set of ensemble forecasts for the period 2000–2019. Unlike operational archive data (which contains model upgrades that change characteristics over time), the GEFSv12 reforecast uses a single, fixed model version applied retrospectively, enabling unbiased statistical learning from historical forecast-error relationships.\n\nKEY SPECIFICATIONS:\n- Period: January 2000 – December 2019 (20 years)\n- Members: 1 control (c00) + 4 perturbed (p01–p04) = 5 total\n- Spatial resolution: approximately 0.25° × 0.25° (native T254 spectral, ~40 km)\n- Lead times: available at 3-hour intervals from Day 0 through Day 16\n- Variables: includes precipitation (APCP), temperature, wind, geopotential, humidity, and others\n- Storage format: GRIB2, available via NOAA S3 (s3://noaa-gefs-retrospective/)\n\nPRECIPITATION SPECIFICS:\n- Variable: APCP_SFC (accumulated precipitation, surface)\n- Accumulation periods: available as 6-hour, 12-hour, and 24-hour accumulations\n- Bias: GEFSv12 has a documented positive bias over orographic regions (Western Ghats) and a tendency to underestimate convective rainfall during active monsoon breaks\n- Ensemble spread: 5 members provide moderate spread estimates; fewer members than the 50-member operational EPS, so spread estimates are noisier",
+    "approx_tokens": 357
+  },
+  {
+    "chunk_id": "doc_11_gefsv12_dataset_chunk1",
+    "doc_id": "doc_11_gefsv12_dataset",
+    "source": "GEFSv12 Reforecast Dataset — Technical Documentation",
+    "citation": "Hamill et al. (2022) \"The Reanalysis-Based Global Ensemble Forecast System (GEFSv12) Reforecast Dataset\"; NOAA PSL GEFSv12 documentation",
+    "url": "https://psl.noaa.gov/forecasts/reforecast2/README_GEFSv12.pdf",
+    "section": "GEFSv12 Reforecast Characteristics for Indian Monsoon Verification",
+    "text": "imate convective rainfall during active monsoon breaks\n- Ensemble spread: 5 members provide moderate spread estimates; fewer members than the 50-member operational EPS, so spread estimates are noisier\n\nSUITABILITY FOR BUST DETECTION:\nThe GEFSv12 reforecast is uniquely well-suited for training a bust-detection model because:\n1. Fixed model version: no spurious error trends due to model upgrades\n2. Consistent initialization: uses ERA5 for initial conditions, providing homogeneous starting conditions\n3. Long record: 20 years provides stable statistical learning for seasonal/regional stratification\n4. Free public access: via NOAA S3, no API key required for research use\n\nLIMITATIONS RELEVANT TO OUR MODEL:\n- 5 members: ensemble-spread features derived from 5 members are noisier than from 50 members; our spread estimates have higher sampling uncertainty\n- Retrospective study only: the model represents GEFSv12's characteristics, not the current operational GEFSv12.1 or future versions\n- 2000–2004 training window: our current dataset uses only the first 5 years of the 20-year archive; expanding to the full 2000–2019 window would improve statistical robustness (Tier 2 roadmap item)\n\nIMD GRIDDED TRUTH DATASET:\nAs the observational reference, we use the IMD 0.25° gridded daily rainfall dataset derived from station observations across India, accessed via the imdlib Python library. This dataset provides a homogeneous, quality-controlled daily rainfall reference from 1901–present, specifically designed for verification against gridded model output over India.",
+    "approx_tokens": 390
+  },
+  {
+    "chunk_id": "doc_11_gefsv12_dataset_chunk2",
+    "doc_id": "doc_11_gefsv12_dataset",
+    "source": "GEFSv12 Reforecast Dataset — Technical Documentation",
+    "citation": "Hamill et al. (2022) \"The Reanalysis-Based Global Ensemble Forecast System (GEFSv12) Reforecast Dataset\"; NOAA PSL GEFSv12 documentation",
+    "url": "https://psl.noaa.gov/forecasts/reforecast2/README_GEFSv12.pdf",
+    "section": "GEFSv12 Reforecast Characteristics for Indian Monsoon Verification",
+    "text": "dlib Python library. This dataset provides a homogeneous, quality-controlled daily rainfall reference from 1901–present, specifically designed for verification against gridded model output over India.\n\nFORECAST-TRUTH ALIGNMENT IN OUR SYSTEM:\nOur dataset joins GEFSv12 24-hour accumulated precipitation forecasts (00Z initialization, Day 1/3/5/7/10) with the corresponding IMD truth for the same valid date and grid cell. The alignment produces 35,200 rows across 44 unique issue dates, 5 lead times, and the Maharashtra grid (18–22°N, 72–76°E at 0.25° resolution), with 0.00% missing data.",
+    "approx_tokens": 147
+  },
+  {
+    "chunk_id": "doc_12_ml_forecast_verification_chunk0",
+    "doc_id": "doc_12_ml_forecast_verification",
+    "source": "Machine Learning for Weather Forecast Verification and Uncertainty Quantification",
+    "citation": "Rasp & Lerch (2018) \"Neural networks for post-processing ensemble weather forecasts\"; Taillardat et al. (2016) \"Calibrated ensemble forecasts using quantile regression forests\"; Vannitsem et al. (2021) \"Statistical post-processing for weather forecasts\"",
+    "url": "https://doi.org/10.1175/MWR-D-18-0187.1",
+    "section": "ML-Based Approaches to Forecast Error Prediction and Calibration",
+    "text": "ML APPROACHES TO FORECAST UNCERTAINTY — SURVEY:\n\nMOTIVATION:\nStatistical post-processing of NWP output has a long history, but ML-based methods have recently demonstrated substantial improvements over traditional regression techniques. The key insight is that ML models can capture non-linear interactions between predictors (lead time, season, ensemble spread, regime) that linear regression cannot.\n\nGRADIENT BOOSTED TREES FOR VERIFICATION:\nGradient boosted trees (XGBoost, LightGBM) are particularly well-suited for tabular meteorological verification data because:\n1. Native handling of non-linearity and interactions (e.g., the effect of spread on bust probability depends on lead time)\n2. Robust to feature collinearity and missing values\n3. Fast training on moderate-sized datasets (thousands to tens of thousands of rows)\n4. Natural feature importance via SHAP (SHapley Additive exPlanations)\n\nSHAP VALUES IN METEOROLOGICAL CONTEXT:\nSHAP provides a rigorous, game-theoretic decomposition of each prediction into contributions from each feature. For a specific forecast:\n- Positive SHAP value for forecast_mean: the high rainfall amount is pushing the bust probability up.\n- Negative SHAP value for forecast_spread: low spread is pushing the bust probability down (model is more confident).\n- The sum of all SHAP values equals the model's log-odds output.\n\nSHAP values are the standard method for \"black-box\" model explanation in verification contexts, replacing older variable importance measures (Gini impurity, permutation importance) that lack the additive decomposition property.",
+    "approx_tokens": 393
+  },
+  {
+    "chunk_id": "doc_12_ml_forecast_verification_chunk1",
+    "doc_id": "doc_12_ml_forecast_verification",
+    "source": "Machine Learning for Weather Forecast Verification and Uncertainty Quantification",
+    "citation": "Rasp & Lerch (2018) \"Neural networks for post-processing ensemble weather forecasts\"; Taillardat et al. (2016) \"Calibrated ensemble forecasts using quantile regression forests\"; Vannitsem et al. (2021) \"Statistical post-processing for weather forecasts\"",
+    "url": "https://doi.org/10.1175/MWR-D-18-0187.1",
+    "section": "ML-Based Approaches to Forecast Error Prediction and Calibration",
+    "text": "d method for \"black-box\" model explanation in verification contexts, replacing older variable importance measures (Gini impurity, permutation importance) that lack the additive decomposition property.\n\nISOTONIC CALIBRATION:\nIsotonic regression (pool-adjacent violators) is the standard calibration method for binary classifier scores when a moderate amount of calibration data is available. It:\n- Non-parametrically maps raw model scores to calibrated probabilities\n- Guarantees monotonicity (higher score always maps to higher probability)\n- Requires a separate validation set to fit (preventing circular calibration on training data)\n\nOur model's Brier Score improved from 0.0513 (raw) to 0.0480 (calibrated) using isotonic regression on the validation fold — a modest but genuine improvement in calibration.\n\nTIME-AWARE CROSS-VALIDATION (CRITICAL FOR WEATHER ML):\nStandard random k-fold cross-validation is inappropriate for meteorological forecasting data because:\n1. Weather events are temporally autocorrelated — consecutive days share similar conditions.\n2. Using future data (relative to the issue date) to train a model introduces a subtle form of leakage.\n3. Random folds mix train and test data in time, artificially inflating performance metrics.\n\nThe correct approach is a chronological split or rolling-origin validation:\n- Train on issues dates 1 through T_train\n- Validate on T_train + 1 through T_val\n- Test on T_val + 1 through T_end\n- Never shuffle across this boundary.",
+    "approx_tokens": 369
+  },
+  {
+    "chunk_id": "doc_12_ml_forecast_verification_chunk2",
+    "doc_id": "doc_12_ml_forecast_verification",
+    "source": "Machine Learning for Weather Forecast Verification and Uncertainty Quantification",
+    "citation": "Rasp & Lerch (2018) \"Neural networks for post-processing ensemble weather forecasts\"; Taillardat et al. (2016) \"Calibrated ensemble forecasts using quantile regression forests\"; Vannitsem et al. (2021) \"Statistical post-processing for weather forecasts\"",
+    "url": "https://doi.org/10.1175/MWR-D-18-0187.1",
+    "section": "ML-Based Approaches to Forecast Error Prediction and Calibration",
+    "text": "onological split or rolling-origin validation:\n- Train on issues dates 1 through T_train\n- Validate on T_train + 1 through T_val\n- Test on T_val + 1 through T_end\n- Never shuffle across this boundary.\n\nOur model uses a strict 70/15/15 chronological split, ensuring all test set predictions are made using only information that would have been available at the time of prediction.\n\nBUST PROBABILITY AS A DECISION SUPPORT TOOL:\nUnlike point forecasts, probabilistic bust predictions are most valuable for:\n- Prioritizing attention: flag the highest-risk forecasts for additional scrutiny.\n- Contingency planning: knowing P(bust) = 60% allows allocation of emergency resources before verification.\n- Communication: operational forecasters can communicate uncertainty in a consistent, documented way rather than relying on individual judgment.\n\nThe system is explicitly not designed to replace expert meteorologist judgment but to provide a consistent, data-driven signal that can augment it.",
+    "approx_tokens": 244
+  },
+  {
+    "chunk_id": "doc_13_forecast_anomaly_bust_risk_chunk0",
+    "doc_id": "doc_13_forecast_anomaly_bust_risk",
+    "source": "Forecast Anomaly and Regime Context for Bust Risk",
+    "citation": "Webster et al. (1998) \"Monsoons: Processes, Predictability, and the Prospects for Prediction\"; Palmer et al. (2000) \"Predicting uncertainty in forecasts of weather and climate\"",
+    "url": "https://doi.org/10.1175/1520-0469(1998)055<1329:MPPAT>2.0.CO;2",
+    "section": "Forecast Anomaly Features and Extreme Event Predictability",
+    "text": "FORECAST ANOMALY AS A BUST RISK INDICATOR:\n\nDEFINITION:\nforecast_anomaly = forecast_mean - local_climatological_normal(day_of_year, grid_cell)\nwhere local_climatological_normal is the historical mean rainfall for that day-of-year and location, computed from the ERA5/IMD truth series on data prior to the forecast date.\n\nPHYSICAL INTERPRETATION:\n- Positive anomaly (forecast_anomaly > 0): The model predicts more rainfall than climatologically normal for this day/location.\n- Negative anomaly (forecast_anomaly < 0): The model predicts drier conditions than usual.\n- Large |forecast_anomaly| → unusual meteorological conditions → higher inherent uncertainty.\n\nWHY ANOMALY MATTERS FOR BUST RISK:\n1. DISTRIBUTION TAILS: Extreme rainfall events (those in the right tail of the rainfall distribution) are harder to predict accurately because they often involve complex synoptic forcing (monsoon depressions, MJO-enhanced moisture surges) that may be represented poorly or with large uncertainty in NWP ensembles.\n\n2. MODEL PHYSICS LIMITATIONS: Physical parameterizations (convective parameterization in particular) are tuned to represent \"average\" conditions reasonably well. For extreme anomalies, they may produce qualitatively wrong behavior (e.g., triggering convection too early, too late, or in the wrong location).\n\n3. VERIFICATION SENSITIVITY: At high rainfall amounts, the percentile-based error metric (how we define \"bust\") is particularly sensitive: a 20 mm error on a day with 200 mm observed is the same percentile as a 5 mm error on a day with 10 mm observed, but the physical meaning is very different.",
+    "approx_tokens": 398
+  },
+  {
+    "chunk_id": "doc_13_forecast_anomaly_bust_risk_chunk1",
+    "doc_id": "doc_13_forecast_anomaly_bust_risk",
+    "source": "Forecast Anomaly and Regime Context for Bust Risk",
+    "citation": "Webster et al. (1998) \"Monsoons: Processes, Predictability, and the Prospects for Prediction\"; Palmer et al. (2000) \"Predicting uncertainty in forecasts of weather and climate\"",
+    "url": "https://doi.org/10.1175/1520-0469(1998)055<1329:MPPAT>2.0.CO;2",
+    "section": "Forecast Anomaly Features and Extreme Event Predictability",
+    "text": "e define \"bust\") is particularly sensitive: a 20 mm error on a day with 200 mm observed is the same percentile as a 5 mm error on a day with 10 mm observed, but the physical meaning is very different.\n\nBELOW-NORMAL ANOMALY BUST RISK:\nNegative anomalies (forecast well below normal) also elevate bust risk, though less obviously:\n- During active monsoon periods, a forecast predicting dry conditions may simply be wrong about the onset of an active spell.\n- \"Dry busts\" (forecasting drier conditions than occurred) are often associated with missed monsoon depressions or MJO active phases.\n- In our model, forecast_anomaly < -15 mm triggers the rule-based explanation: \"Forecast is well below normal — potential missed rainfall event.\"\n\nSEASONAL MODULATION:\nThe significance of a given forecast_anomaly value depends on season:\n- During peak monsoon (July–August), absolute anomalies are naturally larger (higher base rainfall), so the same percentage deviation represents different information.\n- The doy_sin/doy_cos features in our model capture this seasonal context and allow the XGBoost model to interpret anomaly values in their seasonal context.\n\nHEAVY RAINFALL CONTEXT:\nWhen forecast_mean > 50 mm/day (our rule threshold for \"High rainfall forecast\"), the probability of a large absolute error is inherently higher — not because the model is worse at high rainfall, but because the magnitude of potential errors scales with the quantity being predicted. This is captured both in the rule-based explanation and implicitly in the model's learned splits.",
+    "approx_tokens": 387
+  },
+  {
+    "chunk_id": "doc_13_forecast_anomaly_bust_risk_chunk2",
+    "doc_id": "doc_13_forecast_anomaly_bust_risk",
+    "source": "Forecast Anomaly and Regime Context for Bust Risk",
+    "citation": "Webster et al. (1998) \"Monsoons: Processes, Predictability, and the Prospects for Prediction\"; Palmer et al. (2000) \"Predicting uncertainty in forecasts of weather and climate\"",
+    "url": "https://doi.org/10.1175/1520-0469(1998)055<1329:MPPAT>2.0.CO;2",
+    "section": "Forecast Anomaly Features and Extreme Event Predictability",
+    "text": "high rainfall, but because the magnitude of potential errors scales with the quantity being predicted. This is captured both in the rule-based explanation and implicitly in the model's learned splits.\n\nIMPLICATIONS FOR DISASTER MANAGEMENT:\nHeavy rainfall forecasts (high forecast_anomaly, high forecast_mean) that also carry high bust probability present the most operationally consequential risk: either the heavy rain will occur (and emergency preparation is warranted) or the forecast will bust (and resources may be misdirected). The combination of both signals is specifically what our system is designed to flag early.",
+    "approx_tokens": 156
+  },
+  {
+    "chunk_id": "doc_14_forecast_communication_users_chunk0",
+    "doc_id": "doc_14_forecast_communication_users",
+    "source": "Operational Forecast Communication and Decision-Support for Disaster Risk Reduction",
+    "citation": "WMO GDPFS Guidelines; IMD Operational Weather Forecast Communication Standards; IPCC SREX (2012) — Special Report on Extreme Events",
+    "url": "https://community.wmo.int/en/activity-areas/pwi",
+    "section": "Communicating Forecast Uncertainty to Non-Expert Operational Users",
+    "text": "COMMUNICATING PROBABILISTIC FORECAST UNCERTAINTY:\n\nTHE CHALLENGE:\nOperational users (disaster management officers, agricultural advisors, emergency planners) often lack meteorological training. Communicating probabilistic forecasts (P(bust) = 68%) in a way that is actionable without being misleading requires careful design.\n\nBEST PRACTICES FROM WMO AND OPERATIONAL METEOROLOGY:\n\n1. BAND LABELS OVER RAW PROBABILITIES:\nPresenting \"Low Reliability\" or \"High Reliability\" instead of \"68% bust probability\" is standard practice in operational systems (e.g., UK Met Office's public uncertainty indicators, ECMWF's probabilistic products). Band labels are more robust to probability miscalibration and easier to incorporate into decision frameworks.\n\n2. ANCHORING TO HISTORICAL CONTEXT:\nInstead of \"68% probability,\" tell the user: \"In similar historical situations, about 7 in 10 forecasts missed significantly.\" This grounds the probability in a tangible, understandable frame.\n\n3. ACTION-ORIENTED LANGUAGE:\nGood uncertainty communication specifies WHAT TO DO, not just the probability. For example:\n- Low Reliability (P ≥ 45%): \"Consider contingency plans; monitor subsequent model runs for convergence\"\n- Moderate Reliability (20% ≤ P < 45%): \"Useful guidance; some uncertainty remains; verify with regional forecasters\"\n- High Reliability (P < 20%): \"Forecast expected to verify; proceed with normal planning\"",
+    "approx_tokens": 349
+  },
+  {
+    "chunk_id": "doc_14_forecast_communication_users_chunk1",
+    "doc_id": "doc_14_forecast_communication_users",
+    "source": "Operational Forecast Communication and Decision-Support for Disaster Risk Reduction",
+    "citation": "WMO GDPFS Guidelines; IMD Operational Weather Forecast Communication Standards; IPCC SREX (2012) — Special Report on Extreme Events",
+    "url": "https://community.wmo.int/en/activity-areas/pwi",
+    "section": "Communicating Forecast Uncertainty to Non-Expert Operational Users",
+    "text": "ate Reliability (20% ≤ P < 45%): \"Useful guidance; some uncertainty remains; verify with regional forecasters\"\n- High Reliability (P < 20%): \"Forecast expected to verify; proceed with normal planning\"\n\n4. THE ROLE OF EXPLANATION:\nProviding a reason for low reliability (e.g., \"high ensemble spread\" or \"long lead time\") helps users assess whether the uncertainty source is generic or specifically relevant to their decision context.\n\nWHAT OUR SYSTEM DOES:\nOur RAG explanation layer takes the structured model output (bust probability, confidence band, SHAP top features) and generates a 3–5 sentence explanation in operational language that:\n- States the confidence band in plain terms\n- Identifies the meteorological driver(s) behind the uncertainty\n- Anchors claims to verified documentation (with citations)\n- Avoids claiming causal certainty or inventing facts the model didn't produce\n\nAVOIDING MISINTERPRETATION:\n- The RAG layer explicitly does NOT state that a bust will occur — only that the probability is elevated.\n- Probability labels should never be interpreted as deterministic predictions.\n- Users are reminded that all numbers come from the ML model, not the RAG system.",
+    "approx_tokens": 294
+  },
+  {
+    "chunk_id": "doc_14_forecast_communication_users_chunk2",
+    "doc_id": "doc_14_forecast_communication_users",
+    "source": "Operational Forecast Communication and Decision-Support for Disaster Risk Reduction",
+    "citation": "WMO GDPFS Guidelines; IMD Operational Weather Forecast Communication Standards; IPCC SREX (2012) — Special Report on Extreme Events",
+    "url": "https://community.wmo.int/en/activity-areas/pwi",
+    "section": "Communicating Forecast Uncertainty to Non-Expert Operational Users",
+    "text": "only that the probability is elevated.\n- Probability labels should never be interpreted as deterministic predictions.\n- Users are reminded that all numbers come from the ML model, not the RAG system.\n\nDECISION-MAKER GUIDANCE FOR HIGH BUST-PROBABILITY SCENARIOS:\n1. Identify the decision horizon: If the forecast is for Day 7, how much will the bust probability update by Day 3 (when more information is available)?\n2. Consider asymmetric consequences: For disaster management, the cost of missing a true bust (Type II error) may greatly exceed the cost of over-preparing for a bust that doesn't occur (Type I error).\n3. Use the replay mode for calibration training: Historical cases showing the system's track record help users develop appropriate decision frameworks.\n4. Never act on bust probability alone: It is a decision-support signal, not a replacement for expert forecast judgment or for consulting additional data sources.",
+    "approx_tokens": 233
+  },
+  {
+    "chunk_id": "doc_15_mjo_active_break_cycles_chunk0",
+    "doc_id": "doc_15_mjo_active_break_cycles",
+    "source": "Intraseasonal Variability — MJO and Monsoon Active-Break Cycles",
+    "citation": "Goswami & Ajaya Mohan (2001) \"Intraseasonal oscillations and interannual variability of the Indian Summer Monsoon\"; Wheeler & Hendon (2004) \"An all-season real-time multivariate MJO index\"",
+    "url": "https://doi.org/10.1175/1520-0442(2001)014<1180:IOAIVO>2.0.CO;2",
+    "section": "Active/Break Monsoon Transitions and Their Impact on Forecast Predictability",
+    "text": "ACTIVE/BREAK MONSOON CYCLES:\n\nDEFINITIONS:\n- Active monsoon spell: period of enhanced rainfall over central India, associated with a well-organized monsoon trough near its climatological position, active eastward moisture flux from the Bay of Bengal. Typically 3–7 days duration.\n- Break monsoon spell: period of suppressed rainfall over most of India (except some Himalayan regions), associated with northward displacement of the monsoon trough and enhanced northeast India rainfall. Duration: 2–10 days.\n\nTRANSITION DYNAMICS:\nThe transition between active and break spells is modulated by:\n1. The Madden-Julian Oscillation (MJO): 30–60 day wave that modulates tropical convection globally. Active MJO phase 2–3 enhances Indian monsoon rainfall; phases 6–7 suppress it. MJO is predictable to approximately 3 weeks.\n2. Low-frequency planetary wave forcing (quasi-biweekly oscillation, 10–20 day).\n3. Intraseasonal SST (sea surface temperature) variability in the Bay of Bengal and Arabian Sea.\n\nFORECAST PREDICTABILITY AT TRANSITION POINTS:\nThe most challenging periods for NWP forecasting are the TRANSITIONS between active and break spells:\n- The model may predict continuation of an active spell when a break is imminent.\n- Or it may predict a break when an active spell is strengthening.\n- These 1–3 day \"transition errors\" produce very large absolute errors for specific dates and specific locations.",
+    "approx_tokens": 348
+  },
+  {
+    "chunk_id": "doc_15_mjo_active_break_cycles_chunk1",
+    "doc_id": "doc_15_mjo_active_break_cycles",
+    "source": "Intraseasonal Variability — MJO and Monsoon Active-Break Cycles",
+    "citation": "Goswami & Ajaya Mohan (2001) \"Intraseasonal oscillations and interannual variability of the Indian Summer Monsoon\"; Wheeler & Hendon (2004) \"An all-season real-time multivariate MJO index\"",
+    "url": "https://doi.org/10.1175/1520-0442(2001)014<1180:IOAIVO>2.0.CO;2",
+    "section": "Active/Break Monsoon Transitions and Their Impact on Forecast Predictability",
+    "text": "break is imminent.\n- Or it may predict a break when an active spell is strengthening.\n- These 1–3 day \"transition errors\" produce very large absolute errors for specific dates and specific locations.\n\nIMPLICATIONS FOR BUST PROBABILITY:\nTransition dates systematically produce higher bust rates. Our model captures this through:\n- forecast_anomaly: during transitions, the anomaly can swing from large positive to large negative quickly.\n- hist_bias: if similar transition dates (same season, similar synoptic pattern) historically showed large errors, hist_bias will be elevated.\n- The model does NOT explicitly detect transitions (that requires regime classification — future work) but the feature signal of transition events naturally produces elevated bust probability.\n\nSEASONAL CONTEXT:\nOur doy_sin/doy_cos features encode the day-of-year in a circular fashion, allowing the model to learn that June (onset uncertainty), September (withdrawal uncertainty), and peak monsoon July–August (maximum active/break oscillation) have systematically different error characteristics.\n\nKEY TAKEAWAY FOR RAG EXPLANATIONS:\nWhen a forecast is flagged as Low Reliability during monsoon season (June–September), one contributing factor is the inherent difficulty of predicting active/break transitions. This is consistent with the well-documented, published literature on monsoon intraseasonal variability and is not a failure unique to our system — it reflects a fundamental physical predictability limit of the atmosphere.",
+    "approx_tokens": 377
+  }
+]

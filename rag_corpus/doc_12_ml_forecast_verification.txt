@@ -1,0 +1,56 @@
+SOURCE: Machine Learning for Weather Forecast Verification and Uncertainty Quantification
+CITATION: Rasp & Lerch (2018) "Neural networks for post-processing ensemble weather forecasts"; Taillardat et al. (2016) "Calibrated ensemble forecasts using quantile regression forests"; Vannitsem et al. (2021) "Statistical post-processing for weather forecasts"
+URL: https://doi.org/10.1175/MWR-D-18-0187.1
+SECTION: ML-Based Approaches to Forecast Error Prediction and Calibration
+
+---
+
+ML APPROACHES TO FORECAST UNCERTAINTY — SURVEY:
+
+MOTIVATION:
+Statistical post-processing of NWP output has a long history, but ML-based methods have recently demonstrated substantial improvements over traditional regression techniques. The key insight is that ML models can capture non-linear interactions between predictors (lead time, season, ensemble spread, regime) that linear regression cannot.
+
+GRADIENT BOOSTED TREES FOR VERIFICATION:
+Gradient boosted trees (XGBoost, LightGBM) are particularly well-suited for tabular meteorological verification data because:
+1. Native handling of non-linearity and interactions (e.g., the effect of spread on bust probability depends on lead time)
+2. Robust to feature collinearity and missing values
+3. Fast training on moderate-sized datasets (thousands to tens of thousands of rows)
+4. Natural feature importance via SHAP (SHapley Additive exPlanations)
+
+SHAP VALUES IN METEOROLOGICAL CONTEXT:
+SHAP provides a rigorous, game-theoretic decomposition of each prediction into contributions from each feature. For a specific forecast:
+- Positive SHAP value for forecast_mean: the high rainfall amount is pushing the bust probability up.
+- Negative SHAP value for forecast_spread: low spread is pushing the bust probability down (model is more confident).
+- The sum of all SHAP values equals the model's log-odds output.
+
+SHAP values are the standard method for "black-box" model explanation in verification contexts, replacing older variable importance measures (Gini impurity, permutation importance) that lack the additive decomposition property.
+
+ISOTONIC CALIBRATION:
+Isotonic regression (pool-adjacent violators) is the standard calibration method for binary classifier scores when a moderate amount of calibration data is available. It:
+- Non-parametrically maps raw model scores to calibrated probabilities
+- Guarantees monotonicity (higher score always maps to higher probability)
+- Requires a separate validation set to fit (preventing circular calibration on training data)
+
+Our model's Brier Score improved from 0.0513 (raw) to 0.0480 (calibrated) using isotonic regression on the validation fold — a modest but genuine improvement in calibration.
+
+TIME-AWARE CROSS-VALIDATION (CRITICAL FOR WEATHER ML):
+Standard random k-fold cross-validation is inappropriate for meteorological forecasting data because:
+1. Weather events are temporally autocorrelated — consecutive days share similar conditions.
+2. Using future data (relative to the issue date) to train a model introduces a subtle form of leakage.
+3. Random folds mix train and test data in time, artificially inflating performance metrics.
+
+The correct approach is a chronological split or rolling-origin validation:
+- Train on issues dates 1 through T_train
+- Validate on T_train + 1 through T_val
+- Test on T_val + 1 through T_end
+- Never shuffle across this boundary.
+
+Our model uses a strict 70/15/15 chronological split, ensuring all test set predictions are made using only information that would have been available at the time of prediction.
+
+BUST PROBABILITY AS A DECISION SUPPORT TOOL:
+Unlike point forecasts, probabilistic bust predictions are most valuable for:
+- Prioritizing attention: flag the highest-risk forecasts for additional scrutiny.
+- Contingency planning: knowing P(bust) = 60% allows allocation of emergency resources before verification.
+- Communication: operational forecasters can communicate uncertainty in a consistent, documented way rather than relying on individual judgment.
+
+The system is explicitly not designed to replace expert meteorologist judgment but to provide a consistent, data-driven signal that can augment it.
