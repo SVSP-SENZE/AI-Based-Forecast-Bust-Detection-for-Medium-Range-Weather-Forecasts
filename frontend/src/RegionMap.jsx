@@ -1,11 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { bandMeta, formatProb } from './utils';
 
 export default function RegionMap({ cells, onCellClick, selectedCell }) {
   const mapRef = useRef(null);
   const leafletMapRef = useRef(null);
   const layerGroupRef = useRef(null);
+  const [mapReady, setMapReady] = useState(false);
 
+  // Initialize Leaflet map once
   useEffect(() => {
     if (!document.getElementById('leaflet-css')) {
       const link = document.createElement('link');
@@ -15,8 +17,9 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
       document.head.appendChild(link);
     }
 
+    let isMounted = true;
     import('leaflet').then((L) => {
-      if (leafletMapRef.current) return;
+      if (!isMounted || leafletMapRef.current || !mapRef.current) return;
 
       const map = L.default.map(mapRef.current, {
         center: [19.75, 74.25],
@@ -46,14 +49,19 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
 
       leafletMapRef.current = map;
       layerGroupRef.current = L.default.layerGroup().addTo(map);
+      setMapReady(true);
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
+  // Render grid cells whenever cells, selectedCell, or mapReady changes
   useEffect(() => {
-    if (!leafletMapRef.current || !cells || cells.length === 0) return;
+    if (!mapReady || !leafletMapRef.current || !layerGroupRef.current || !cells || cells.length === 0) return;
 
     import('leaflet').then((L) => {
-      if (!layerGroupRef.current) return;
       layerGroupRef.current.clearLayers();
 
       cells.forEach((cell) => {
@@ -63,7 +71,7 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
           selectedCell.lat === cell.lat &&
           selectedCell.lon === cell.lon;
 
-        const opacity = 0.6 + cell.bust_probability * 0.35; // 0.60 to 0.95 opacity
+        const opacity = 0.65 + cell.bust_probability * 0.3; // 0.65 to 0.95 opacity
 
         const rect = L.default.rectangle(
           [
@@ -91,7 +99,7 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
         rect.addTo(layerGroupRef.current);
       });
     });
-  }, [cells, selectedCell, onCellClick]);
+  }, [cells, selectedCell, mapReady, onCellClick]);
 
   return (
     <div
