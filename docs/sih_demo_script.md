@@ -1,96 +1,78 @@
-# Smart India Hackathon (SIH) — 2.5 Minute Winning Video Demo Script
+# 🏆 Smart India Hackathon (SIH) — Demo Video Script (2:30 min)
 
-**Project Name:** AI-Based Forecast Bust Detection for Medium-Range Weather Forecasts  
-**Problem Category:** Climate & Disaster Management / Weather Risk Intelligence  
-**Target Video Duration:** **2 Minutes 30 Seconds** (Strictly within the 2–3 Minute SIH Format)
-
----
-
-## 🎬 Video Overview & Timestamp Breakdown
-
-| Timestamp | Section Name | Focus & On-Screen Visuals | Key Standout Element |
-| :--- | :--- | :--- | :--- |
-| **0:00 – 0:20** | **1. Problem & Challenge** | Flood footage, satellite monsoon map, failed rainfall warnings | **Impact of unpredicted forecast busts** |
-| **0:20 – 0:50** | **2. Innovation & Impact** | High-level system architecture diagram, ROC-AUC 0.9316 benchmark | **Physics-Informed ML + Calibrated XGBoost + RAG** |
-| **0:50 – 2:00** | **3. Live MVP Walkthrough** | Interactive Web Dashboard ([http://127.0.0.1:5173](http://127.0.0.1:5173)) | **Grid Map ⟶ SHAP Drivers ⟶ RAG Assistant ⟶ Replay** |
-| **2:00 – 2:30** | **4. Roadmap & Future** | Pan-India deployment map, IMD/NDRF integration plan | **Scale to 3.2M sq. km & National Emergency Ops** |
+**Project Title:** AI-Based Forecast Bust Detection for Medium-Range Weather Forecasts  
+**Target Duration:** 2 Minutes 30 Seconds (Strictly within the 2–3 min SIH guideline)  
+**Tone:** Confident, technical, high-energy, and impact-driven.
 
 ---
 
-## 📜 Full Script with Voiceover & Screen Recording Directions
+## ⏱️ Scene-by-Scene Breakdown
+
+| Timeframe | Section | Core Focus |
+|---|---|---|
+| **0:00 – 0:20** (20s) | **The Core Problem** | The hidden danger of medium-range forecast "busts" during the Indian Monsoon. |
+| **0:20 – 0:50** (30s) | **Our Solution & Innovation** | AI-driven meta-predictability engine combining dynamical physics with calibrated ML & Synoptic RAG. |
+| **0:50 – 2:05** (75s) | **Live Prototype Walkthrough** | Map view, Lead Day toggle, 10-Day Trajectory, SHAP drivers, Synoptic RAG, Historical Replay & Metrics. |
+| **2:05 – 2:30** (25s) | **Impact & Roadmap** | IMD/NDMA operational deployment, saving lives, agricultural protection, and scalability. |
 
 ---
 
-### SECTION 1: Problem Statement & Core Challenge (0:00 – 0:20 | 20 Seconds)
+## 🎬 Full Script with Screen Directions
 
-**🎥 Visuals:**  
-*Opening shot: Flash floods over urban/coastal India, followed by an overlay showing standard 7-day IMD/GEFS weather forecasts vs actual torrential rain.*
-
-**🎙️ Voiceover (Paced & Impactful):**  
-> *"In medium-range weather forecasting, when a numerical model predicts light rain but localized torrential downpours hit—that's a **Forecast Bust**. 
-> 
-> Current global ensemble systems provide spread, but they fail to quantify localized predictability limits over terrain like the Western Ghats. When forecast busts strike unannounced, disaster response agencies lose precious lead time, leading to catastrophic flash floods and crop damage."*
+### 📍 PART 1: The Core Problem (0:00 – 0:20)
+* **Visual on Screen:** Title slide transitioning into news clips/graphics of sudden flash floods, unpredicted cloudbursts, and crop loss in Maharashtra / Western Ghats.
+* **Voiceover:**
+> *"Every monsoon, numerical weather prediction models like GEFS and ECMWF guide disaster management across India. But in the critical Day 3 to Day 10 medium range, these models experience catastrophic forecast 'busts'—days where extreme rainfall is either missed completely or falsely alarmed due to rapid convective amplification.*  
+> *When a forecast busts, dams overflow without warning, farmers lose entire harvests, and disaster relief teams are caught unprepared. Today, forecasters have no automated tool that tells them: **'Is this forecast actually trustworthy?'**"*
 
 ---
 
-### SECTION 2: Innovation & Solution Impact (0:20 – 0:50 | 30 Seconds)
-
-**🎥 Visuals:**  
-*Smooth transition to an animated architecture diagram showing GEFS + IMD High-Res Data ⟶ Feature Engine ⟶ Calibrated XGBoost ⟶ SHAP Explainability ⟶ Meteorological RAG. Highlight big bold metric text: **ROC-AUC: 0.9316 | Brier Score: 0.0513**.*
-
-**🎙️ Voiceover (Energetic & Confident):**  
-> *"To solve this, we built India’s first **Physics-Informed AI Forecast Bust Detector**. 
-> 
-> Instead of blindly trusting ensemble averages, our system extracts 10 spatial-temporal signals—including convective gradient disagreement, historical systematic bias, and ensemble divergence. 
-> 
-> Powered by an Isotonic-Calibrated XGBoost classifier trained on 35,200 grid points, our solution achieves an extraordinary **0.9316 ROC-AUC** and catches **95.7% of forecast busts** before they happen—converting raw uncertainty into calibrated, actionable risk intelligence."*
+### 📍 PART 2: Our Innovation & Solution (0:20 – 0:50)
+* **Visual on Screen:** Architecture slide / System Diagram highlighting the three-tier stack: NOAA GEFSv12 ensemble reforecasts + IMD 0.25° gridded ground truth $\rightarrow$ Calibrated XGBoost with Isotonic Regression $\rightarrow$ FAISS-powered Synoptic RAG.
+* **Voiceover:**
+> *"Introducing the **AI-Based Forecast Bust Detector**—an operational meta-reliability engine that audits numerical weather predictions before disaster strikes.*  
+> *Instead of blindly accepting raw forecasts, our system analyzes multi-physics signals—including ensemble spread, orographic moisture flux, vorticity, and historical regional biases. Using chronologically validated, isotonic-calibrated Machine Learning paired with a domain-specific Synoptic RAG engine, we output calibrated bust probabilities and plain-language meteorological explanations in real time."*
 
 ---
 
-### SECTION 3: Live MVP & Website Walkthrough (0:50 – 2:00 | 70 Seconds)
+### 📍 PART 3: Live Prototype Walkthrough (0:50 – 2:05)
 
-**🎥 Visuals:**  
-*Screen recording of the live dashboard running at `http://127.0.0.1:5173/`.*
+#### 🔹 1. Regional Map & Lead-Time Degradation (0:50 – 1:15)
+* **Visual on Screen:** Screen recording of the Live Dashboard (`http://127.0.0.1:5173/`).
+* **Action:** Toggle from **Day 1 (D1)** to **Day 5 (D5)** to **Day 7 (D7)** on the map. Point out the regional summary bar updating dynamically.
+* **Voiceover:**
+> *"Let's look at the live platform. Here in our dark-mode operational console over Maharashtra and the Western Ghats, each grid cell is colored by calibrated bust risk: green for high confidence, amber for moderate risk, and red for high bust probability.*  
+> *Notice how at Day 1, short-range confidence is high. But as we advance to Lead Day 7, the system immediately flags elevated bust risk along the orographic barrier of the Western Ghats where convective uncertainty escalates."*
 
-#### 📍 Step A: Interactive Spatial Map (0:50 – 1:10)
-**Screen Action:** Mouse hovers over the 0.25° gridded Leaflet map over Maharashtra and Western Ghats. Click on grid cell $(20.0^\circ\text{N}, 73.0^\circ\text{E})$.  
-**🎙️ Voiceover:**  
-> *"Here is our live dashboard. Forecasters can view the 0.25° grid over high-risk regions. When we select a cell near Mumbai, the system instantly computes the 10-day forecast reliability trajectory. While Days 1 to 3 remain confident, Day 5 jumps to a **72% High-Risk Bust Warning**."*
+#### 🔹 2. 10-Day Trajectory, SHAP Explainability & Synoptic RAG (1:15 – 1:45)
+* **Visual on Screen:** Click on a high-risk red/amber cell along the coast.
+* **Action:** 
+  1. Show the **10-Day Bust Probability Trajectory histogram** in the right panel.
+  2. Show the **Feature Drivers (SHAP)** breakdown.
+  3. Click **"💬 Explain with Meteorological Context"** and show the instant RAG answer with document citations.
+* **Voiceover:**
+> *"Clicking any grid point reveals its complete 10-Day Trajectory, showing exactly at what lead day forecast skill degrades. Below, Level-1 SHAP explainability isolates the physical drivers—such as wide ensemble spread and large negative anomalies.*  
+> *For operational meteorologists, clicking 'Explain with Meteorological Context' invokes our FAISS-powered RAG layer, synthesizing authoritative IMD and ECMWF domain literature to explain the synoptic physics behind the bust risk with zero hallucinations."*
 
-#### 🔍 Step B: SHAP Feature Attribution (1:10 – 1:30)
-**Screen Action:** Scroll down to the "Model Feature Drivers (SHAP)" and "Key Signals" panel showing green/red arrows.  
-**🎙️ Voiceover:**  
-> *"Why is the model flagging a bust? Our SHAP explainability engine reveals the exact physical drivers: high spatial gradient disagreement of 14.2 mm/day combined with severe ensemble spread across GEFS members."*
-
-#### 📖 Step C: Meteorological Knowledge RAG Assistant (1:30 – 1:45)
-**Screen Action:** Click the **💬 Explain with Meteorological Context** button. The blue RAG panel expands showing physics text and citations `[1] IMD Monsoon Mission Report`, `[2] WMO Forecast Verification Guide`.  
-**🎙️ Voiceover:**  
-> *"For operational teams who need atmospheric context, our embedded **Meteorological RAG Assistant** retrieves grounded explanations directly from IMD and WMO literature—explaining how convective instability degrades medium-range predictability without hallucinating."*
-
-#### 🔄 Step D: Pre-Cached Offline Historical Replay (1:45 – 2:00)
-**Screen Action:** Switch date selector to **July 15, 2002 Drought Bust Case**. The historical observed vs predicted rainfall comparison chart animates.  
-**🎙️ Voiceover:**  
-> *"And for zero-failure operational resilience, our system includes pre-cached historical replays. Here during the historic July 2002 monsoon drought bust, our AI flagged an 84% bust probability 5 days in advance."*
-
----
-
-### SECTION 4: Market Impact & Business / Deployment Roadmap (2:00 – 2:30 | 30 Seconds)
-
-**🎥 Visuals:**  
-*Graphic showing Pan-India expansion map (3.2M sq. km grid) integrated with IMD/NCMRWF weather API feeds, NDRF disaster portals, and agricultural advisory SMS alerts.*
-
-**🎙️ Voiceover (Closing & Inspiring):**  
-> *"Our vision extends beyond a prototype. Designed with sub-20 millisecond API microservices, our platform seamlessly integrates into IMD forecasting workflows, NDRF emergency control rooms, and farmer advisory apps. 
-> 
-> By scaling across all 36 Indian meteorological sub-divisions, we turn weather uncertainty into early disaster preparedness—saving lives, protecting infrastructure, and safeguarding agricultural yields. 
-> 
-> Thank you."*
+#### 🔹 3. Historical Replay & Verification Benchmarks (1:45 – 2:05)
+* **Visual on Screen:** Switch to the **Replay** tab (click "2003-07-01 Peak Monsoon Active Surge"), then switch to the **Metrics** tab.
+* **Voiceover:**
+> *"Under the **Replay Tab**, we can audit real historical events, such as the 2003 Peak Monsoon Surge, proving our model flagged the upcoming bust using strictly pre-event forecast data verified against IMD ground truth.*  
+> *And under **Metrics**, our chronologically held-out test evaluation proves superior performance: achieving a **0.93 ROC-AUC** and **0.051 Brier score**, dramatically outperforming linear baselines."*
 
 ---
 
-## 🌟 Why This Script Will Make Your Presentation Stand Out at SIH
+### 📍 PART 4: Impact & Road Ahead (2:05 – 2:30)
+* **Visual on Screen:** Roadmap graphic showing IMD / NDMA integration, Early Warning SMS feeds, and pan-India expansion.
+* **Voiceover:**
+> *"This system is 100% modular, open-source ready, and designed for direct integration into IMD and State Disaster Management Authorities.*  
+> *By turning raw weather predictions into calibrated, explainable confidence intelligence, we empower authorities to pre-position NDRF teams, optimize reservoir discharges, and protect millions of agricultural livelihoods.  
+> **Forecast Bust Detector: Bringing transparency, physics, and trust to weather forecasting.** Thank you."*
 
-1. **Strict 2.5-Minute Pacing**: Fits the SIH evaluation guidelines perfectly (between 2 to 3 minutes, under 4 minutes).
-2. **Empirical Grounding**: Mentions exact benchmark numbers (**ROC-AUC 0.9316**, **Brier Score 0.0513**, **35,200 grid rows**, **95.7% Recall**) which judges look for.
-3. **Shows Real Working Technology**: Walks through live interactive map, SHAP explainability, RAG literature assistant, and offline replays.
-4. **Clear Market & Social Impact**: Connects advanced AI directly to disaster management (NDRF) and agricultural protection in India.
+---
+
+## 🎙️ Recording Checklist & Tips
+1. **Screen Resolution:** Record in 1080p (1920x1080) in full-screen dark mode.
+2. **Pacing:** Speak at ~130–140 words per minute; keep mouse movements smooth and intentional.
+3. **Audio Quality:** Use a decent external microphone and remove background noise.
+4. **Highlights:** Use cursor circles or zoom-ins when pointing out the 10-day histogram and RAG citations.
