@@ -19,19 +19,28 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
       if (leafletMapRef.current) return;
 
       const map = L.default.map(mapRef.current, {
-        center: [20, 74],
+        center: [19.75, 74.25],
         zoom: 7,
         scrollWheelZoom: true,
         zoomControl: true,
       });
 
-      // Dark basemap tiles
+      // Free, high-performance Esri Dark Gray Canvas Basemap (Zero API Key required)
       L.default.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
         {
-          attribution: '© OpenStreetMap, © CARTO',
-          subdomains: 'abcd',
-          maxZoom: 19,
+          attribution: '&copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors',
+          maxZoom: 16,
+        }
+      ).addTo(map);
+
+      // Add Esri Dark Gray reference label overlay (cities, district boundaries)
+      L.default.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
+        {
+          attribution: '',
+          maxZoom: 16,
+          opacity: 0.75,
         }
       ).addTo(map);
 
@@ -44,6 +53,7 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
     if (!leafletMapRef.current || !cells || cells.length === 0) return;
 
     import('leaflet').then((L) => {
+      if (!layerGroupRef.current) return;
       layerGroupRef.current.clearLayers();
 
       cells.forEach((cell) => {
@@ -53,7 +63,7 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
           selectedCell.lat === cell.lat &&
           selectedCell.lon === cell.lon;
 
-        const opacity = 0.55 + cell.bust_probability * 0.35; // more risk = more opaque
+        const opacity = 0.6 + cell.bust_probability * 0.35; // 0.60 to 0.95 opacity
 
         const rect = L.default.rectangle(
           [
@@ -61,8 +71,8 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
             [cell.lat + 0.125, cell.lon + 0.125],
           ],
           {
-            color: isSelected ? '#fff' : 'transparent',
-            weight: isSelected ? 2 : 0,
+            color: isSelected ? '#ffffff' : 'rgba(0,0,0,0.4)',
+            weight: isSelected ? 2.5 : 0.5,
             fillColor: meta.color,
             fillOpacity: opacity,
           }
@@ -86,7 +96,7 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
   return (
     <div
       ref={mapRef}
-      style={{ height: '100%', width: '100%', borderRadius: '10px', minHeight: 300 }}
+      style={{ height: '100%', width: '100%', borderRadius: '10px', minHeight: 350 }}
     />
   );
 }
