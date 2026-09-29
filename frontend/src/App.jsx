@@ -3,23 +3,34 @@ import RegionMap from './RegionMap';
 import WhyPanel from './WhyPanel';
 import ReplayPanel from './ReplayPanel';
 import MetricsPanel from './MetricsPanel';
-import { fetchRegion, fetchExplanation, postRagQuery } from './api';
-import { bandColor } from './utils';
+import { fetchRegion, fetchExplanation, fetchReliability, postRagQuery } from './api';
+import { bandMeta, formatProb } from './utils';
+import './App.css';
 
 const LEAD_DAYS = [1, 3, 5, 7, 10];
-const DEFAULT_DATE = '2003-07-01';
+const DEFAULT_DATE = '2003-07-15';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('map');     // 'map' | 'replay' | 'metrics'
-  const [leadDay, setLeadDay] = useState(3);
+  const [activeTab, setActiveTab] = useState('map');
+  const [leadDay, setLeadDay] = useState(5);
   const [issueDate, setIssueDate] = useState(DEFAULT_DATE);
   const [cells, setCells] = useState([]);
   const [selectedCell, setSelectedCell] = useState(null);
   const [explanation, setExplanation] = useState(null);
+  const [reliability, setReliability] = useState(null); // full 10-day trajectory
   const [ragAnswer, setRagAnswer] = useState(null);
   const [ragLoading, setRagLoading] = useState(false);
   const [mapLoading, setMapLoading] = useState(false);
+  const [explLoading, setExplLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
+  const [backendOk, setBackendOk] = useState(null);
+
+  // Health ping
+  useEffect(() => {
+    fetch('http://localhost:8000/health')
+      .then(r => r.ok ? setBackendOk(true) : setBackendOk(false))
+      .catch(() => setBackendOk(false));
+  }, []);
 
   const loadRegion = useCallback(async () => {
     setMapLoading(true);
@@ -27,158 +38,281 @@ export default function App() {
     try {
       const data = await fetchRegion(leadDay, issueDate);
       setCells(data.cells || []);
-    } catch (e) {
-      setApiError('Cannot reach API. Make sure the backend is running on port 8000.');
+    } catch {
+      setApiError('Cannot reach backend on port 8000. Please start the API server.');
       setCells([]);
     }
     setMapLoading(false);
   }, [leadDay, issueDate]);
 
-  useEffect(() => {
-    loadRegion();
-  }, [loadRegion]);
+  useEffect(() => { loadRegion(); }, [loadRegion]);
 
   const handleCellClick = useCallback(async (cell) => {
     setSelectedCell(cell);
     setExplanation(null);
+    setReliability(null);
     setRagAnswer(null);
+    setExplLoading(true);
     try {
-      const exp = await fetchExplanation(cell.lat, cell.lon, leadDay, issueDate);
+      const [exp, rel] = await Promise.all([
+        fetchExplanation(cell.lat, cell.lon, leadDay, issueDate),
+        fetchReliability(cell.lat, cell.lon, issueDate),
+      ]);
       setExplanation(exp);
+      setReliability(rel);
     } catch {}
+    setExplLoading(false);
   }, [leadDay, issueDate]);
 
   const handleRagQuery = useCallback(async () => {
     if (!explanation) return;
     setRagLoading(true);
-    const q = `Why might the Day ${leadDay} rainfall forecast issued on ${issueDate} over lat=${explanation.location?.lat}, lon=${explanation.location?.lon} bust? The model identified: ${explanation.rule_summary?.join('; ')}`;
+    const q = `Why might the Day ${leadDay} rainfall forecast over lat=${explanation.location?.lat}°N, lon=${explanation.location?.lon}°E issued on ${issueDate} bust? The model signals: ${explanation.rule_summary?.join('; ')}`;
     const ans = await postRagQuery(q, explanation);
     setRagAnswer(ans);
     setRagLoading(false);
   }, [explanation, leadDay, issueDate]);
 
-  const tabStyle = (tab) => ({
-    background: activeTab === tab ? '#2563eb' : '#e2e8f0',
-    color: activeTab === tab ? '#fff' : '#374151',
-    border: 'none',
-    borderRadius: '6px',
-    padding: '0.45rem 1rem',
-    cursor: 'pointer',
-    fontSize: '0.85rem',
-    fontWeight: activeTab === tab ? 700 : 400,
-  });
+  // Compute map-wide statistics
+  const mapStats = cells.length > 0 ? {
+    highRisk: cells.filter(c => c.bust_probability >= 0.55).length,
+    elevRisk:  cells.filter(c => c.bust_probability >= 0.35 && c.bust_probability < 0.55).length,
+    modRisk:  cells.filter(c => c.bust_probability >= 0.18 && c.bust_probability < 0.35).length,
+    safe:     cells.filter(c => c.bust_probability < 0.18).length,
+    avgProb:  cells.reduce((a,c) => a + c.bust_probability, 0) / cells.length,
+  } : null;
 
   return (
-    <div style={{ fontFamily: 'sans-serif', background: '#f1f5f9', minHeight: '100vh' }}>
-      {/* Header */}
-      <div style={{ background: '#0f172a', color: '#fff', padding: '1rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800 }}>
-            ⛈️ Forecast Bust Detector
-          </h1>
-          <p style={{ margin: 0, fontSize: '0.75rem', color: '#94a3b8' }}>
-            AI-based reliability engine · Maharashtra region · GEFSv12 + IMD
-          </p>
+    <div className="app-shell">
+      {/* ── HEADER ── */}
+      <header className="app-header">
+        <div className="header-brand">
+          <div className="brand-icon">⛈</div>
+          <div>
+            <div className="brand-title">Forecast Bust Detector</div>
+            <div className="brand-sub">AI-based reliability engine · Maharashtra & W. Ghats · GEFSv12 + IMD</div>
+          </div>
         </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.5rem' }}>
-          <button style={tabStyle('map')} onClick={() => setActiveTab('map')}>🗺️ Map</button>
-          <button style={tabStyle('replay')} onClick={() => setActiveTab('replay')}>🕐 Replay</button>
-          <button style={tabStyle('metrics')} onClick={() => setActiveTab('metrics')}>📊 Metrics</button>
-        </div>
-      </div>
 
-      {/* Error banner */}
+        <nav className="header-nav">
+          {[
+            { id: 'map',     icon: '◈', label: 'Map' },
+            { id: 'replay',  icon: '⟳', label: 'Replay' },
+            { id: 'metrics', icon: '⊞', label: 'Metrics' },
+          ].map(t => (
+            <button
+              key={t.id}
+              className={`nav-tab ${activeTab === t.id ? 'active' : ''}`}
+              onClick={() => setActiveTab(t.id)}
+            >
+              <span className="nav-icon">{t.icon}</span>{t.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="header-status">
+          <div className={`status-pill ${backendOk === true ? 'ok' : backendOk === false ? 'error' : 'pinging'}`}>
+            <div className="status-dot" />
+            {backendOk === true ? 'API Live' : backendOk === false ? 'API Offline' : 'Connecting…'}
+          </div>
+        </div>
+      </header>
+
+      {/* ── ERROR BANNER ── */}
       {apiError && (
-        <div style={{ background: '#fee2e2', color: '#991b1b', padding: '0.75rem 1.5rem', fontSize: '0.85rem' }}>
-          ⚠️ {apiError}
+        <div className="error-banner">
+          <span>⚠</span> {apiError}
         </div>
       )}
 
-      {/* Map tab */}
+      {/* ══════════════ MAP TAB ══════════════ */}
       {activeTab === 'map' && (
-        <div style={{ display: 'flex', gap: '0', height: 'calc(100vh - 80px)' }}>
-          {/* Left: controls + map */}
-          <div style={{ flex: 1.6, display: 'flex', flexDirection: 'column', padding: '1rem', gap: '0.75rem', overflow: 'auto' }}>
-            {/* Controls */}
-            <div style={{ background: '#fff', borderRadius: '8px', padding: '0.75rem 1rem', display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap', boxShadow: '0 1px 3px rgba(0,0,0,.08)' }}>
-              <div>
-                <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'block', marginBottom: '0.25rem' }}>Issue Date</label>
+        <div className="map-layout">
+
+          {/* ── LEFT COLUMN ── */}
+          <div className="map-left">
+            {/* Controls row */}
+            <div className="controls-bar card">
+              <div className="control-group">
+                <label className="ctrl-label">Issue Date</label>
                 <input
                   type="date"
+                  className="ctrl-input"
                   value={issueDate}
-                  onChange={(e) => setIssueDate(e.target.value)}
-                  style={{ border: '1px solid #d1d5db', borderRadius: '5px', padding: '0.3rem 0.5rem', fontSize: '0.85rem' }}
+                  onChange={e => setIssueDate(e.target.value)}
                 />
               </div>
-              <div>
-                <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'block', marginBottom: '0.25rem' }}>Lead Day</label>
-                <div style={{ display: 'flex', gap: '0.35rem' }}>
-                  {LEAD_DAYS.map((d) => (
+              <div className="control-group">
+                <label className="ctrl-label">Lead Day</label>
+                <div className="lead-day-pills">
+                  {LEAD_DAYS.map(d => (
                     <button
                       key={d}
+                      className={`lead-pill ${leadDay === d ? 'active' : ''}`}
                       onClick={() => setLeadDay(d)}
-                      style={{
-                        background: leadDay === d ? '#2563eb' : '#e2e8f0',
-                        color: leadDay === d ? '#fff' : '#374151',
-                        border: 'none', borderRadius: '5px',
-                        padding: '0.3rem 0.6rem', cursor: 'pointer', fontSize: '0.82rem',
-                        fontWeight: leadDay === d ? 700 : 400,
-                      }}
                     >
                       D{d}
                     </button>
                   ))}
                 </div>
               </div>
-              {mapLoading && <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Loading map...</span>}
+              <div className="ctrl-spacer" />
+              {mapLoading && (
+                <div className="loading-badge">
+                  <div className="spin" /> Loading
+                </div>
+              )}
             </div>
 
+            {/* Summary stats bar */}
+            {mapStats && (
+              <div className="stats-row">
+                <StatChip color="#ef4444" label="High Risk"    value={mapStats.highRisk} total={cells.length} />
+                <StatChip color="#f97316" label="Elevated"     value={mapStats.elevRisk}  total={cells.length} />
+                <StatChip color="#f59e0b" label="Moderate"     value={mapStats.modRisk}  total={cells.length} />
+                <StatChip color="#22c55e" label="High Conf."   value={mapStats.safe}     total={cells.length} />
+                <div className="avg-prob-chip">
+                  <span className="avg-label">Avg. Bust Prob.</span>
+                  <span className="avg-value" style={{ color: bandMeta(mapStats.avgProb).color }}>
+                    {formatProb(mapStats.avgProb)}
+                  </span>
+                </div>
+              </div>
+            )}
+
             {/* Legend */}
-            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.78rem', color: '#64748b' }}>
-              {[['High confidence', '#22c55e'], ['Moderate confidence', '#f59e0b'], ['Low confidence (bust risk)', '#ef4444']].map(([label, color]) => (
-                <span key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  <span style={{ width: 14, height: 14, background: color, borderRadius: 3, display: 'inline-block' }} />
+            <div className="legend-row">
+              {[
+                ['< 18% High Confidence', '#22c55e'],
+                ['18–35% Moderate Risk',  '#f59e0b'],
+                ['35–55% Elevated Risk',  '#f97316'],
+                ['> 55% Low Confidence',  '#ef4444'],
+              ].map(([label, color]) => (
+                <span key={label} className="legend-item">
+                  <span className="legend-dot" style={{ background: color }} />
                   {label}
                 </span>
               ))}
             </div>
 
             {/* Map */}
-            <div style={{ background: '#fff', borderRadius: '8px', overflow: 'hidden', flex: 1, boxShadow: '0 1px 3px rgba(0,0,0,.08)' }}>
+            <div className="map-container card">
               <RegionMap cells={cells} onCellClick={handleCellClick} selectedCell={selectedCell} />
             </div>
           </div>
 
-          {/* Right: Why panel */}
-          <div style={{ width: '340px', background: '#fff', borderLeft: '1px solid #e2e8f0', overflow: 'auto', boxShadow: '-2px 0 8px rgba(0,0,0,.04)' }}>
-            {selectedCell && (
-              <div style={{ padding: '0.75rem 1rem', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: '0.82rem', color: '#475569' }}>
-                📍 Lat {selectedCell.lat} · Lon {selectedCell.lon} · Day {leadDay}
+          {/* ── RIGHT PANEL ── */}
+          <div className="side-panel">
+            {selectedCell ? (
+              <>
+                {/* Cell header */}
+                <div className="panel-location">
+                  <div className="loc-coords">
+                    <span className="mono">{selectedCell.lat}°N, {selectedCell.lon}°E</span>
+                    <span className="loc-lead">Day {leadDay}</span>
+                  </div>
+                  {selectedCell.bust_probability != null && (
+                    <div
+                      className="loc-prob badge"
+                      style={{
+                        background: bandMeta(selectedCell.bust_probability).color + '22',
+                        color: bandMeta(selectedCell.bust_probability).color,
+                      }}
+                    >
+                      {formatProb(selectedCell.bust_probability)}
+                    </div>
+                  )}
+                </div>
+
+                {/* 10-day trajectory mini chart */}
+                {reliability?.forecasts && (
+                  <div className="trajectory-section">
+                    <div className="section-title">10-Day Bust Probability Trajectory</div>
+                    <TrajectoryChart forecasts={reliability.forecasts} activeDay={leadDay} />
+                  </div>
+                )}
+
+                {/* Why panel */}
+                {explLoading ? (
+                  <div className="panel-loading">
+                    <div className="shimmer" style={{ height: 80, borderRadius: 8, margin: '1rem' }} />
+                  </div>
+                ) : (
+                  <WhyPanel
+                    explanation={explanation}
+                    ragAnswer={ragAnswer}
+                    onRagQuery={handleRagQuery}
+                    loading={ragLoading}
+                  />
+                )}
+              </>
+            ) : (
+              <div className="panel-empty">
+                <div className="empty-icon">◈</div>
+                <div className="empty-title">Select a grid cell</div>
+                <div className="empty-sub">Click any point on the map to view<br/>bust risk details and SHAP drivers</div>
               </div>
             )}
-            <WhyPanel
-              explanation={explanation}
-              ragAnswer={ragAnswer}
-              onRagQuery={handleRagQuery}
-              loading={ragLoading}
-            />
           </div>
         </div>
       )}
 
-      {/* Replay tab */}
       {activeTab === 'replay' && (
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '1rem', background: '#fff', marginTop: '1rem', borderRadius: '8px' }}>
-          <ReplayPanel />
-        </div>
+        <div className="tab-page"><ReplayPanel /></div>
       )}
-
-      {/* Metrics tab */}
       {activeTab === 'metrics' && (
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '1rem', background: '#fff', marginTop: '1rem', borderRadius: '8px' }}>
-          <MetricsPanel />
-        </div>
+        <div className="tab-page"><MetricsPanel /></div>
       )}
+    </div>
+  );
+}
+
+// ── Sub-components ──────────────────────────────────────────
+
+function StatChip({ color, label, value, total }) {
+  const pct = total > 0 ? (value / total) * 100 : 0;
+  return (
+    <div className="stat-chip">
+      <div className="stat-dot" style={{ background: color }} />
+      <div>
+        <div className="stat-value">{value}</div>
+        <div className="stat-label">{label}</div>
+      </div>
+      <div className="stat-bar">
+        <div className="stat-bar-fill" style={{ width: `${pct}%`, background: color }} />
+      </div>
+    </div>
+  );
+}
+
+function TrajectoryChart({ forecasts, activeDay }) {
+  const maxProb = Math.max(...forecasts.map(f => f.bust_probability), 0.1);
+  return (
+    <div className="traj-chart">
+      {forecasts.map(f => {
+        const meta = bandMeta(f.bust_probability);
+        const pct = (f.bust_probability / maxProb) * 100;
+        const isActive = f.lead_day === activeDay;
+        return (
+          <div key={f.lead_day} className={`traj-bar-wrap ${isActive ? 'traj-active' : ''}`}>
+            <div className="traj-prob mono" style={{ color: meta.color }}>
+              {formatProb(f.bust_probability)}
+            </div>
+            <div className="traj-col">
+              <div
+                className="traj-fill"
+                style={{
+                  height: `${Math.max(pct, 6)}%`,
+                  background: meta.color,
+                  opacity: isActive ? 1 : 0.55,
+                  boxShadow: isActive ? `0 0 8px ${meta.color}60` : 'none',
+                }}
+              />
+            </div>
+            <div className="traj-label mono">D{f.lead_day}</div>
+          </div>
+        );
+      })}
     </div>
   );
 }

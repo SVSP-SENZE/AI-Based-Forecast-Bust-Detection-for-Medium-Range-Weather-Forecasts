@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { probColor } from './utils';
+import { bandMeta, formatProb } from './utils';
 
-// We import leaflet dynamically to avoid SSR issues
 export default function RegionMap({ cells, onCellClick, selectedCell }) {
   const mapRef = useRef(null);
   const leafletMapRef = useRef(null);
   const layerGroupRef = useRef(null);
 
   useEffect(() => {
-    // Load leaflet CSS once
     if (!document.getElementById('leaflet-css')) {
       const link = document.createElement('link');
       link.id = 'leaflet-css';
@@ -18,17 +16,24 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
     }
 
     import('leaflet').then((L) => {
-      if (leafletMapRef.current) return; // already initialized
+      if (leafletMapRef.current) return;
 
       const map = L.default.map(mapRef.current, {
         center: [20, 74],
         zoom: 7,
         scrollWheelZoom: true,
+        zoomControl: true,
       });
 
-      L.default.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-      }).addTo(map);
+      // Dark basemap tiles
+      L.default.tileLayer(
+        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        {
+          attribution: '© OpenStreetMap, © CARTO',
+          subdomains: 'abcd',
+          maxZoom: 19,
+        }
+      ).addTo(map);
 
       leafletMapRef.current = map;
       layerGroupRef.current = L.default.layerGroup().addTo(map);
@@ -42,11 +47,13 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
       layerGroupRef.current.clearLayers();
 
       cells.forEach((cell) => {
-        const color = probColor(cell.bust_probability);
+        const meta = bandMeta(cell.bust_probability);
         const isSelected =
           selectedCell &&
           selectedCell.lat === cell.lat &&
           selectedCell.lon === cell.lon;
+
+        const opacity = 0.55 + cell.bust_probability * 0.35; // more risk = more opaque
 
         const rect = L.default.rectangle(
           [
@@ -54,18 +61,20 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
             [cell.lat + 0.125, cell.lon + 0.125],
           ],
           {
-            color: isSelected ? '#1e40af' : '#475569',
-            weight: isSelected ? 2 : 0.5,
-            fillColor: color,
-            fillOpacity: 0.65,
+            color: isSelected ? '#fff' : 'transparent',
+            weight: isSelected ? 2 : 0,
+            fillColor: meta.color,
+            fillOpacity: opacity,
           }
         );
 
         rect.bindTooltip(
-          `Lat ${cell.lat}, Lon ${cell.lon}<br/>` +
-            `Bust prob: ${(cell.bust_probability * 100).toFixed(1)}%<br/>` +
-            `Confidence: <b>${cell.confidence_band}</b>`,
-          { sticky: true }
+          `<div style="font-family:Inter,sans-serif;font-size:12px;line-height:1.6;padding:2px 0">` +
+          `<b style="color:${meta.color}">${meta.label}</b><br/>` +
+          `Bust prob: <b>${formatProb(cell.bust_probability)}</b><br/>` +
+          `<span style="color:#8b93a8">${cell.lat}°N, ${cell.lon}°E</span>` +
+          `</div>`,
+          { sticky: true, className: 'dark-tooltip' }
         );
 
         rect.on('click', () => onCellClick && onCellClick(cell));
@@ -77,7 +86,7 @@ export default function RegionMap({ cells, onCellClick, selectedCell }) {
   return (
     <div
       ref={mapRef}
-      style={{ height: '450px', width: '100%', borderRadius: '8px' }}
+      style={{ height: '100%', width: '100%', borderRadius: '10px', minHeight: 300 }}
     />
   );
 }
